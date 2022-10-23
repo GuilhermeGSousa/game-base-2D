@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxnpkfdn2ddf1"]
+
+[ext_resource type="Script" path="res://scripts/common/ui/pause_menu.gd" id="1_kcrr8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j07ig"]
+font_size = 141
+
+[node name="pause_menu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_kcrr8")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/AspectRatioContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+text = "PAUSE"
+label_settings = SubResource("LabelSettings_j07ig")
+horizontal_alignment = 1
+vertical_alignment = 1

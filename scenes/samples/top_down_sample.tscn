@@ -1,0 +1,79 @@
+[gd_scene load_steps=15 format=3 uid="uid://db57g85ysxyka"]
+
+[ext_resource type="Script" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
+[ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="2_stipn"]
+[ext_resource type="Script" path="res://scripts/interaction/hit/hurtbox.gd" id="3_5xi2j"]
+[ext_resource type="Script" path="res://scripts/interaction/hit/hitbox.gd" id="3_f7uyv"]
+[ext_resource type="Script" path="res://scripts/common/gun.gd" id="5_lr7vq"]
+[ext_resource type="PackedScene" uid="uid://dsf307fg18dwa" path="res://scenes/common/target_camera.tscn" id="6_35upf"]
+[ext_resource type="Shader" path="res://shaders/shake2D.gdshader" id="6_rbxgb"]
+[ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="7_ft6n5"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="8_fni0t"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/slow_mo_effect.gd" id="9_6wasg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xemoo"]
+radius = 51.8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6222"]
+size = Vector2(107, 28)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olu1m"]
+shader = ExtResource("6_rbxgb")
+shader_parameter/is_shaking = true
+shader_parameter/amplitude = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui55i"]
+radius = 73.05
+
+[node name="Top Down Sample" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(724, 264)
+motion_mode = 1
+script = ExtResource("1_1dc0n")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_stipn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_xemoo")
+
+[node name="Top Down Sword" type="Area2D" parent="CharacterBody2D"]
+script = ExtResource("3_5xi2j")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Top Down Sword"]
+modulate = Color(0, 0.0901961, 1, 1)
+position = Vector2(50, 0)
+scale = Vector2(1.04, 0.280001)
+texture = ExtResource("7_ft6n5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Top Down Sword"]
+position = Vector2(51.5, 0)
+shape = SubResource("RectangleShape2D_s6222")
+
+[node name="Gun" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("5_lr7vq")
+
+[node name="target_camera" parent="." instance=ExtResource("6_35upf")]
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("damage_effects")]
+position = Vector2(1048, 258)
+script = ExtResource("3_f7uyv")
+hp = 50.0
+damage_effects = [NodePath("ShakeEffect"), NodePath("SlowMoEffect")]
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+modulate = Color(1, 0.635294, 1, 1)
+material = SubResource("ShaderMaterial_olu1m")
+texture = ExtResource("7_ft6n5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_ui55i")
+
+[node name="ShakeEffect" type="Node2D" parent="HitBox" node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_fni0t")
+sprite = NodePath("../Sprite2D")
+
+[node name="SlowMoEffect" type="Node2D" parent="HitBox"]
+script = ExtResource("9_6wasg")
+slowmo_scale = 0.1

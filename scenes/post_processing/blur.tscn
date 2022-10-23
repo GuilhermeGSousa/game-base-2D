@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://oal6vwq28cvr"]
+
+[ext_resource type="Shader" path="res://shaders/post_processing/blur_postprocess.gdshader" id="1_sxeel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b3oi8"]
+shader = ExtResource("1_sxeel")
+shader_parameter/strength = null
+
+[node name="Blur" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_b3oi8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://h7lv5imsmein"]
+
+[ext_resource type="Shader" path="res://shaders/post_processing/chromatic_abberation_postprocess.gdshader" id="1_u7o7a"]
+[ext_resource type="Texture2D" uid="uid://dht5c2q5ho733" path="res://sprites/shader_textures/chromatic_abberation_offset.png" id="2_sxhmc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w7cmd"]
+shader = ExtResource("1_u7o7a")
+shader_parameter/strength = 2.136
+shader_parameter/offset_image = ExtResource("2_sxhmc")
+
+[node name="Chromatic Abberation" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_w7cmd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 3.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true

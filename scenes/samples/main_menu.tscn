@@ -1,0 +1,272 @@
+[gd_scene load_steps=18 format=3 uid="uid://b08xu0srd5ot7"]
+
+[ext_resource type="Script" path="res://scripts/common/ui/main_menu.gd" id="1_7gw0o"]
+[ext_resource type="PackedScene" uid="uid://yhw10xdgdx8s" path="res://scenes/samples/platformer_sample.tscn" id="2_gqgdn"]
+[ext_resource type="PackedScene" uid="uid://x456vflwsdau" path="res://scenes/scene_transitions/circle_transition.tscn" id="3_lqaap"]
+[ext_resource type="Script" path="res://scripts/common/ui/audio_menu.gd" id="4_mjs4o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_utnyj"]
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_0qyyl"]
+font_size = 100
+
+[sub_resource type="Animation" id="Animation_u1ere"]
+resource_name = "main_menu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Main Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings Menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ns3jf"]
+resource_name = "settings_menu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Main Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1152, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings Menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ro8gj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Main Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings Menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xq8ga"]
+_data = {
+"RESET": SubResource("Animation_ro8gj"),
+"main_menu": SubResource("Animation_u1ere"),
+"settings_menu": SubResource("Animation_ns3jf")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h0fc5"]
+animation = &"main_menu"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cmvsc"]
+animation = &"settings_menu"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ckc0g"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_huiay"]
+xfade_time = 1.0
+advance_mode = 2
+advance_expression = "self.current_menu == Menu.SETTINGS_MENU"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b8jnv"]
+xfade_time = 1.0
+advance_mode = 2
+advance_expression = "current_menu == Menu.MAIN_MENU"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6w8s2"]
+states/End/position = Vector2(925, 167)
+states/Start/position = Vector2(225, 179)
+states/main_menu/node = SubResource("AnimationNodeAnimation_h0fc5")
+states/main_menu/position = Vector2(431, 179)
+states/settings_menu/node = SubResource("AnimationNodeAnimation_cmvsc")
+states/settings_menu/position = Vector2(685, 179)
+transitions = ["Start", "main_menu", SubResource("AnimationNodeStateMachineTransition_ckc0g"), "main_menu", "settings_menu", SubResource("AnimationNodeStateMachineTransition_huiay"), "settings_menu", "main_menu", SubResource("AnimationNodeStateMachineTransition_b8jnv")]
+graph_offset = Vector2(-12, 98)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_62be6"]
+
+[node name="menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main Menu" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu Control" type="Control" parent="Main Menu" node_paths=PackedStringArray("start_button", "settings_button", "exit_button")]
+layout_mode = 2
+script = ExtResource("1_7gw0o")
+start_button = NodePath("../MarginContainer/VBoxContainer/start_button")
+settings_button = NodePath("../MarginContainer/VBoxContainer/settings_button")
+exit_button = NodePath("../MarginContainer/VBoxContainer/exit_button")
+start_scene_path = ExtResource("2_gqgdn")
+transition_path = ExtResource("3_lqaap")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main Menu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="Label" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Title"
+label_settings = SubResource("LabelSettings_utnyj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="start_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="settings_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="exit_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Settings Menu" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_right = 1152.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Audio Control" type="Control" parent="Settings Menu" node_paths=PackedStringArray("master_slider", "music_slider", "sfx_slider")]
+layout_mode = 2
+script = ExtResource("4_mjs4o")
+master_slider = NodePath("../MarginContainer/VBoxContainer/Master/HSlider")
+music_slider = NodePath("../MarginContainer/VBoxContainer/Music/HSlider")
+sfx_slider = NodePath("../MarginContainer/VBoxContainer/SFX/HSlider")
+
+[node name="MarginContainer" type="MarginContainer" parent="Settings Menu"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Menu/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_0qyyl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Master" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/Master"]
+layout_mode = 2
+text = "Master"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/Master"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Music" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/Music"]
+layout_mode = 2
+text = "Music
+"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="SFX" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/SFX"]
+layout_mode = 2
+text = "SFX
+"
+vertical_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Button" type="Button" parent="Settings Menu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xq8ga")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_6w8s2")
+anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("../Main Menu/Menu Control")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_62be6")
+
+[connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/Button" to="Main Menu/Menu Control" method="_on_return_main_menu_button_pressed"]
