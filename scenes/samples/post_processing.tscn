@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://da4rogt4ku6vs"]
+
+[ext_resource type="Texture2D" uid="uid://ctuyqlhugsiwo" path="res://icon.svg" id="1_1s1rm"]
+[ext_resource type="PackedScene" uid="uid://h7lv5imsmein" path="res://scenes/post_processing/chromatic_abberation.tscn" id="2_l4b5o"]
+[ext_resource type="PackedScene" uid="uid://oal6vwq28cvr" path="res://scenes/post_processing/blur.tscn" id="3_574tj"]
+[ext_resource type="PackedScene" uid="uid://cfpwtbtyrlmiq" path="res://scenes/post_processing/crt.tscn" id="4_8sf6q"]
+[ext_resource type="PackedScene" uid="uid://dpbl3uivd8lc0" path="res://scenes/post_processing/vignette.tscn" id="5_c0vsi"]
+
+[node name="Post Processing" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(592, 343)
+zoom = Vector2(1.348, 1.348)
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(592, 343)
+texture = ExtResource("1_1s1rm")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Chromatic Abberation" parent="Control" instance=ExtResource("2_l4b5o")]
+
+[node name="Blur" parent="Control" instance=ExtResource("3_574tj")]
+
+[node name="CRT" parent="Control" instance=ExtResource("4_8sf6q")]
+
+[node name="Vignette" parent="Control" instance=ExtResource("5_c0vsi")]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=14 format=3 uid="uid://db57g85ysxyka"]
+
+[ext_resource type="Script" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
+[ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="2_stipn"]
+[ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="3_64icl"]
+[ext_resource type="Script" path="res://scripts/interaction/hit/hitbox.gd" id="3_f7uyv"]
+[ext_resource type="Script" path="res://scripts/interaction/hit/hurtbox.gd" id="3_o7d3i"]
+[ext_resource type="Shader" path="res://shaders/shake2D.gdshader" id="6_rbxgb"]
+[ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="7_ft6n5"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="8_fni0t"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/slow_mo_effect.gd" id="9_6wasg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xemoo"]
+radius = 51.8
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nr0ob"]
+radius = 36.12
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_olu1m"]
+shader = ExtResource("6_rbxgb")
+shader_parameter/amplitude = 0.0
+shader_parameter/is_shaking = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ui55i"]
+radius = 73.05
+
+[node name="Top Down Sample" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(724, 264)
+motion_mode = 1
+script = ExtResource("1_1dc0n")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_stipn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_xemoo")
+
+[node name="HurtBox" type="Area2D" parent="CharacterBody2D"]
+script = ExtResource("3_o7d3i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HurtBox"]
+position = Vector2(74, 0)
+shape = SubResource("CircleShape2D_nr0ob")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="CameraTargeter" type="Node" parent="Camera2D" node_paths=PackedStringArray("camera")]
+script = ExtResource("3_64icl")
+camera = NodePath("..")
+targets = [NodePath("../../CharacterBody2D")]
+
+[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("damage_effects")]
+position = Vector2(1048, 258)
+script = ExtResource("3_f7uyv")
+damage_effects = [NodePath("ShakeEffect"), NodePath("SlowMoEffect")]
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+modulate = Color(1, 0.635294, 1, 1)
+material = SubResource("ShaderMaterial_olu1m")
+texture = ExtResource("7_ft6n5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_ui55i")
+
+[node name="ShakeEffect" type="Node2D" parent="HitBox" node_paths=PackedStringArray("sprite")]
+script = ExtResource("8_fni0t")
+sprite = NodePath("../Sprite2D")
+
+[node name="SlowMoEffect" type="Node2D" parent="HitBox"]
+script = ExtResource("9_6wasg")
+slowmo_scale = 0.1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="HitBox"]
+emission_shape = 1
+emission_sphere_radius = 128.0
+gravity = Vector2(0, 0)
+orbit_velocity_min = 1.0
+orbit_velocity_max = 1.0

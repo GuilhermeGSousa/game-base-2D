@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfpwtbtyrlmiq"]
+
+[ext_resource type="Shader" path="res://shaders/post_processing/crt_postprocess.gdshader" id="1_ug4t0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x0o2u"]
+shader = ExtResource("1_ug4t0")
+shader_parameter/aberration = null
+shader_parameter/brightness = null
+shader_parameter/clip_warp = null
+shader_parameter/discolor = null
+shader_parameter/distort_intensity = null
+shader_parameter/grille_opacity = null
+shader_parameter/noise_opacity = null
+shader_parameter/noise_speed = null
+shader_parameter/overlay = true
+shader_parameter/pixelate = null
+shader_parameter/resolution = null
+shader_parameter/roll = null
+shader_parameter/roll_size = null
+shader_parameter/roll_speed = null
+shader_parameter/roll_variation = null
+shader_parameter/scanlines_opacity = null
+shader_parameter/scanlines_width = null
+shader_parameter/static_noise_intensity = null
+shader_parameter/vignette_intensity = null
+shader_parameter/vignette_opacity = null
+shader_parameter/warp_amount = null
+
+[node name="CRT" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_x0o2u")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
