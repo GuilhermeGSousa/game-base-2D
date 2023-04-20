@@ -3,3 +3,5 @@
 templates/
 build*/
 export_presets.cfg
+
+.vscode/

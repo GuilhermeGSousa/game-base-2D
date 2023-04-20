@@ -1,15 +1,84 @@
-[gd_scene load_steps=18 format=3 uid="uid://b08xu0srd5ot7"]
+[gd_scene load_steps=27 format=3 uid="uid://ch2dxvqi6pvu3"]
 
+[ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="1_0bcbq"]
 [ext_resource type="Script" path="res://scripts/common/ui/main_menu.gd" id="1_7gw0o"]
+[ext_resource type="FontFile" uid="uid://07yvi11ui7vg" path="res://fonts/Peaberry/PeaberryMono.ttf" id="1_i2dk5"]
+[ext_resource type="StyleBox" uid="uid://b6h4sqok6xlxy" path="res://themes/pixelart/button_normal_style.tres" id="2_40phc"]
 [ext_resource type="PackedScene" uid="uid://yhw10xdgdx8s" path="res://scenes/samples/platformer_sample.tscn" id="2_gqgdn"]
 [ext_resource type="PackedScene" uid="uid://x456vflwsdau" path="res://scenes/scene_transitions/circle_transition.tscn" id="3_lqaap"]
+[ext_resource type="StyleBox" uid="uid://dj0ib6qvmygdj" path="res://themes/pixelart/button_pressed_style.tres" id="3_u8ajb"]
+[ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="4_05n6c"]
 [ext_resource type="Script" path="res://scripts/common/ui/audio_menu.gd" id="4_mjs4o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve7hb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n3wa8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbmb2"]
+texture = ExtResource("4_05n6c")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.16192
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 48, 48)
+
+[sub_resource type="Theme" id="Theme_un6xn"]
+default_font = ExtResource("1_i2dk5")
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_i2dk5")
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxEmpty_ve7hb")
+Button/styles/hover = ExtResource("2_40phc")
+Button/styles/normal = ExtResource("2_40phc")
+Button/styles/pressed = ExtResource("3_u8ajb")
+Label/colors/font_color = Color(0.317647, 0.321569, 0.384314, 1)
+Label/constants/line_spacing = 3
+Label/constants/outline_size = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/constants/shadow_outline_size = 1
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_i2dk5")
+Label/styles/normal = SubResource("StyleBoxEmpty_n3wa8")
+Panel/styles/panel = SubResource("StyleBoxTexture_rbmb2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_utnyj"]
 font_size = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_0qyyl"]
 font_size = 100
+
+[sub_resource type="Animation" id="Animation_ro8gj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Main Menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Settings Menu:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1152, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_u1ere"]
 resource_name = "main_menu"
@@ -65,33 +134,6 @@ tracks/1/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_ro8gj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Main Menu:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Settings Menu:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1152, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xq8ga"]
 _data = {
 "RESET": SubResource("Animation_ro8gj"),
@@ -137,6 +179,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_un6xn")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0bcbq")
 
 [node name="Main Menu" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -194,9 +246,9 @@ grow_vertical = 2
 [node name="Audio Control" type="Control" parent="Settings Menu" node_paths=PackedStringArray("master_slider", "music_slider", "sfx_slider")]
 layout_mode = 2
 script = ExtResource("4_mjs4o")
-master_slider = NodePath("../MarginContainer/VBoxContainer/Master/HSlider")
-music_slider = NodePath("../MarginContainer/VBoxContainer/Music/HSlider")
-sfx_slider = NodePath("../MarginContainer/VBoxContainer/SFX/HSlider")
+master_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
+music_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
+sfx_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
 
 [node name="MarginContainer" type="MarginContainer" parent="Settings Menu"]
 layout_mode = 2
@@ -212,46 +264,56 @@ label_settings = SubResource("LabelSettings_0qyyl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Master" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/Master"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_0bcbq")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Master"
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/Master"]
+[node name="Label2" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-
-[node name="Music" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/Music"]
-layout_mode = 2
+theme = ExtResource("1_0bcbq")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Music
 "
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/Music"]
+[node name="Label3" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-
-[node name="SFX" type="HBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Settings Menu/MarginContainer/VBoxContainer/SFX"]
-layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "SFX
 "
 vertical_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/SFX"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme = ExtResource("1_0bcbq")
+
+[node name="HSlider2" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("1_0bcbq")
+
+[node name="HSlider3" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("1_0bcbq")
 
 [node name="Button" type="Button" parent="Settings Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2

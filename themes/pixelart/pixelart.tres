@@ -1,0 +1,54 @@
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://byds11vsd6ber"]
+
+[ext_resource type="StyleBox" uid="uid://b6h4sqok6xlxy" path="res://themes/pixelart/button_normal_style.tres" id="1_o2icn"]
+[ext_resource type="FontFile" uid="uid://07yvi11ui7vg" path="res://fonts/Peaberry/PeaberryMono.ttf" id="1_qo4up"]
+[ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="2_adtur"]
+[ext_resource type="StyleBox" uid="uid://dj0ib6qvmygdj" path="res://themes/pixelart/button_pressed_style.tres" id="2_igfm3"]
+[ext_resource type="StyleBox" uid="uid://cg0tootlnej3o" path="res://themes/pixelart/slider_grabber_area_texture.tres" id="4_liesh"]
+[ext_resource type="Texture2D" uid="uid://c0coqpvq7hu6j" path="res://sprites/ui/ui-grabber.png" id="4_pfl2f"]
+[ext_resource type="StyleBox" path="res://themes/pixelart/slider_area_texture.tres" id="5_fa0x8"]
+[ext_resource type="Texture2D" uid="uid://vcoxg8ao2cpn" path="res://sprites/ui/ui-grabber-disabled.png" id="5_i611v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve7hb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rbmb2"]
+texture = ExtResource("2_adtur")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.16192
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 32, 32)
+
+[resource]
+default_font = ExtResource("1_qo4up")
+Button/constants/h_separation = 0
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_qo4up")
+Button/styles/disabled = null
+Button/styles/focus = SubResource("StyleBoxEmpty_ve7hb")
+Button/styles/hover = ExtResource("1_o2icn")
+Button/styles/normal = ExtResource("1_o2icn")
+Button/styles/pressed = ExtResource("2_igfm3")
+HScrollBar/styles/scroll = ExtResource("5_fa0x8")
+HSlider/icons/grabber = ExtResource("4_pfl2f")
+HSlider/icons/grabber_disabled = ExtResource("5_i611v")
+HSlider/icons/grabber_highlight = ExtResource("4_pfl2f")
+HSlider/styles/grabber_area = ExtResource("4_liesh")
+HSlider/styles/grabber_area_highlight = ExtResource("4_liesh")
+HSlider/styles/slider = ExtResource("5_fa0x8")
+Label/font_sizes/font_size = 16
+Label/fonts/font = ExtResource("1_qo4up")
+Panel/styles/panel = SubResource("StyleBoxTexture_rbmb2")
+ProgressBar/styles/background = ExtResource("5_fa0x8")
+ProgressBar/styles/fill = ExtResource("4_liesh")
+VScrollBar/styles/scroll = ExtResource("5_fa0x8")
+VSlider/icons/grabber = ExtResource("4_pfl2f")
+VSlider/icons/grabber_disabled = ExtResource("5_i611v")
+VSlider/icons/grabber_highlight = ExtResource("4_pfl2f")
+VSlider/styles/grabber_area = ExtResource("4_liesh")
+VSlider/styles/grabber_area_highlight = ExtResource("4_liesh")
+VSlider/styles/slider = ExtResource("5_fa0x8")
