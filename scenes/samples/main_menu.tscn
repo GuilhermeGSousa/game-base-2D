@@ -179,6 +179,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = SubResource("Theme_un6xn")
 
 [node name="Panel" type="Panel" parent="."]
@@ -191,12 +193,9 @@ grow_vertical = 2
 theme = ExtResource("1_0bcbq")
 
 [node name="Main Menu" type="AspectRatioContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="Menu Control" type="Control" parent="Main Menu" node_paths=PackedStringArray("start_button", "settings_button", "exit_button")]
 layout_mode = 2
@@ -234,14 +233,10 @@ layout_mode = 2
 text = "Exit"
 
 [node name="Settings Menu" type="AspectRatioContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 0
 offset_left = 1152.0
-offset_right = 1152.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 2304.0
+offset_bottom = 648.0
 
 [node name="Audio Control" type="Control" parent="Settings Menu" node_paths=PackedStringArray("master_slider", "music_slider", "sfx_slider")]
 layout_mode = 2

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Base 2D"
-run/main_scene="res://scenes/samples/main_menu.tscn"
+run/main_scene="res://scenes/samples/platformer_sample.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -23,6 +23,10 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 AudioManager="*res://scenes/preloads/audio_manager.tscn"
 SceneTransitionManager="*res://scenes/preloads/scene_transition_manager.tscn"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [input]
 
