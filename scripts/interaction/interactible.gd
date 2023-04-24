@@ -1,6 +1,4 @@
-extends Area2D
-
-class_name Interactable
+class_name Interactable extends Area2D
 
 signal on_interacted(interactor : Interactor)
 
