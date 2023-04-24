@@ -17,6 +17,7 @@ var _is_jump_buffered : bool = false
 @onready var _is_on_floor : bool = is_on_floor()
 @onready var _is_on_wall : bool = is_on_wall()
 
+signal on_move_ground()
 signal on_jump_start()
 signal on_jump_end()
 
@@ -79,6 +80,9 @@ func _apply_movement(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 
+	if _is_on_floor:
+		on_move_ground.emit()
+	
 	move_and_slide()
 
 func _apply_jump():

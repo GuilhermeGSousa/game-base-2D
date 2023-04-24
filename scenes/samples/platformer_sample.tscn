@@ -1,101 +1,18 @@
-[gd_scene load_steps=31 format=3 uid="uid://yhw10xdgdx8s"]
+[gd_scene load_steps=20 format=3 uid="uid://yhw10xdgdx8s"]
 
+[ext_resource type="PackedScene" uid="uid://c54p8x5ran4at" path="res://scenes/common/dialog_box.tscn" id="1_lp2vr"]
 [ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="2_dpvvf"]
 [ext_resource type="Script" path="res://scripts/movement/platformer_controller.gd" id="2_kobb3"]
-[ext_resource type="Script" path="res://scripts/common/ui/dialog/dialog_box.gd" id="2_ty4sb"]
 [ext_resource type="Script" path="res://scripts/movement/base_jump.gd" id="3_dck3e"]
 [ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="5_8twu0"]
 [ext_resource type="Texture2D" uid="uid://bs5ru4bg8n3bj" path="res://sprites/tilesets/test-tileset.png" id="6_06eao"]
 [ext_resource type="PackedScene" uid="uid://bxnpkfdn2ddf1" path="res://scenes/common/pause_menu.tscn" id="6_qry4t"]
 [ext_resource type="Script" path="res://scripts/interaction/interactor.gd" id="7_a865q"]
-[ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="7_qnadi"]
 [ext_resource type="Script" path="res://scripts/interaction/dialog/dialog_interactable.gd" id="9_xhclb"]
 [ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="10_e8em0"]
 [ext_resource type="Script" path="res://scripts/camera/camera_area.gd" id="12_e62h3"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_63611"]
-animation = &"off"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xo41a"]
-animation = &"on"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g6ngv"]
-xfade_time = 0.5
-switch_mode = 2
-advance_mode = 2
-advance_expression = "!is_on"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d0swm"]
-xfade_time = 0.5
-switch_mode = 2
-advance_mode = 2
-advance_expression = "is_on"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mulwt"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8gm7i"]
-states/End/position = Vector2(754, 207)
-states/Start/position = Vector2(655, 207)
-states/off/node = SubResource("AnimationNodeAnimation_63611")
-states/off/position = Vector2(655, 100)
-states/on/node = SubResource("AnimationNodeAnimation_xo41a")
-states/on/position = Vector2(477, 100)
-transitions = ["on", "off", SubResource("AnimationNodeStateMachineTransition_g6ngv"), "off", "on", SubResource("AnimationNodeStateMachineTransition_d0swm"), "Start", "off", SubResource("AnimationNodeStateMachineTransition_mulwt")]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_8wspp"]
-
-[sub_resource type="Animation" id="Animation_s52pd"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(57.6, 486)]
-}
-
-[sub_resource type="Animation" id="Animation_gf1ny"]
-resource_name = "off"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(57.6, 650)]
-}
-
-[sub_resource type="Animation" id="Animation_t65mo"]
-resource_name = "on"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(57.6, 486)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_ah15q"]
-_data = {
-"RESET": SubResource("Animation_s52pd"),
-"off": SubResource("Animation_gf1ny"),
-"on": SubResource("Animation_t65mo")
-}
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_3mtwx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6w22"]
 
@@ -177,52 +94,14 @@ size = Vector2(564, 297)
 
 [node name="platformer_sample" type="Node"]
 
-[node name="dialog_box" type="CanvasLayer" parent="."]
+[node name="dialog_box" parent="." instance=ExtResource("1_lp2vr")]
 
-[node name="dialog_box" type="Control" parent="dialog_box" node_paths=PackedStringArray("text")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("7_qnadi")
-script = ExtResource("2_ty4sb")
-text = NodePath("Panel/Label")
+[node name="Panel" parent="dialog_box/dialog_box" index="0"]
+offset_top = 0.0
+offset_bottom = -0.276978
 
-[node name="Panel" type="Panel" parent="dialog_box/dialog_box"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.75
-anchor_right = 0.95
-anchor_bottom = 0.95
-offset_bottom = -0.2771
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="dialog_box/dialog_box/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Hey, I am some text yo"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AnimationTree" type="AnimationTree" parent="dialog_box/dialog_box"]
-tree_root = SubResource("AnimationNodeStateMachine_8gm7i")
-anim_player = NodePath("../AnimationPlayer")
-advance_expression_base_node = NodePath("..")
-active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_8wspp")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="dialog_box/dialog_box"]
-libraries = {
-"": SubResource("AnimationLibrary_ah15q")
-}
+[node name="AnimationTree" parent="dialog_box/dialog_box" index="1"]
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_3mtwx")
 
 [node name="pause_menu" parent="." instance=ExtResource("6_qry4t")]
 visible = false
@@ -253,7 +132,7 @@ texture = ExtResource("2_dpvvf")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platformer_character"]
 shape = SubResource("CapsuleShape2D_t52sc")
 
-[node name="use_interactor" type="Area2D" parent="platformer_character"]
+[node name="use_interactor" type="Area2D" parent="platformer_character" groups=["player"]]
 script = ExtResource("7_a865q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platformer_character/use_interactor"]
@@ -288,7 +167,7 @@ position = Vector2(91, 90.5)
 shape = SubResource("RectangleShape2D_fpma6")
 
 [node name="camera_area 2" type="Area2D" parent="."]
-process_priority = 100
+process_priority = 101
 position = Vector2(578, 2)
 script = ExtResource("12_e62h3")
 
@@ -298,3 +177,5 @@ shape = SubResource("RectangleShape2D_fpma6")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2(440, -164)
+
+[editable path="dialog_box"]

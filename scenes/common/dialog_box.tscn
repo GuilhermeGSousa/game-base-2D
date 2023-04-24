@@ -1,0 +1,138 @@
+[gd_scene load_steps=14 format=3 uid="uid://c54p8x5ran4at"]
+
+[ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="1_4pxb5"]
+[ext_resource type="Script" path="res://scripts/common/ui/dialog/dialog_box.gd" id="2_qy2fo"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_63611"]
+animation = &"off"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xo41a"]
+animation = &"on"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g6ngv"]
+xfade_time = 0.5
+switch_mode = 2
+advance_mode = 2
+advance_expression = "!is_on"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d0swm"]
+xfade_time = 0.5
+switch_mode = 2
+advance_mode = 2
+advance_expression = "is_on"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mulwt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8gm7i"]
+states/End/position = Vector2(754, 207)
+states/Start/position = Vector2(655, 207)
+states/off/node = SubResource("AnimationNodeAnimation_63611")
+states/off/position = Vector2(655, 100)
+states/on/node = SubResource("AnimationNodeAnimation_xo41a")
+states/on/position = Vector2(477, 100)
+transitions = ["on", "off", SubResource("AnimationNodeStateMachineTransition_g6ngv"), "off", "on", SubResource("AnimationNodeStateMachineTransition_d0swm"), "Start", "off", SubResource("AnimationNodeStateMachineTransition_mulwt")]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_202ut"]
+
+[sub_resource type="Animation" id="Animation_s52pd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(57.6, 486)]
+}
+
+[sub_resource type="Animation" id="Animation_gf1ny"]
+resource_name = "off"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(57.6, 650)]
+}
+
+[sub_resource type="Animation" id="Animation_t65mo"]
+resource_name = "on"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(57.6, 486)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ah15q"]
+_data = {
+"RESET": SubResource("Animation_s52pd"),
+"off": SubResource("Animation_gf1ny"),
+"on": SubResource("Animation_t65mo")
+}
+
+[node name="dialog_box" type="CanvasLayer"]
+
+[node name="dialog_box" type="Control" parent="." node_paths=PackedStringArray("text")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4pxb5")
+script = ExtResource("2_qy2fo")
+text = NodePath("Panel/Label")
+
+[node name="Panel" type="Panel" parent="dialog_box"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.75
+anchor_right = 0.95
+anchor_bottom = 0.95
+offset_top = 164.0
+offset_bottom = 163.723
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="dialog_box/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Hey, I am some text yo"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationTree" type="AnimationTree" parent="dialog_box"]
+tree_root = SubResource("AnimationNodeStateMachine_8gm7i")
+anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_202ut")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="dialog_box"]
+libraries = {
+"": SubResource("AnimationLibrary_ah15q")
+}
