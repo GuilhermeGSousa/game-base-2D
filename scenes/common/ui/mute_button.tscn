@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://d0ah7mxbllywt"]
+
+[ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="1_pkq8c"]
+[ext_resource type="Script" path="res://scripts/common/ui/mute_button.gd" id="2_8d5e4"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gq6ym"]
+texture = ExtResource("1_pkq8c")
+region_rect = Rect2(0, 112, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5hduu"]
+texture = ExtResource("1_pkq8c")
+region_rect = Rect2(0, 112, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_its6c"]
+texture = ExtResource("1_pkq8c")
+region_rect = Rect2(16, 112, 16, 16)
+
+[node name="mute_button" type="Button"]
+texture_filter = 1
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxTexture_gq6ym")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5hduu")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_its6c")
+toggle_mode = true
+script = ExtResource("2_8d5e4")

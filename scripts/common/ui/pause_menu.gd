@@ -1,4 +1,4 @@
-class_name PauseMenu extends CanvasLayer
+class_name PauseMenu extends Control
 
 func _ready():
 	resume()

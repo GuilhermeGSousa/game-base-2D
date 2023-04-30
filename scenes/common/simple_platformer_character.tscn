@@ -1,0 +1,164 @@
+[gd_scene load_steps=26 format=3 uid="uid://dnlir14iywfl8"]
+
+[ext_resource type="Script" path="res://scripts/movement/platformer_controller.gd" id="1_mox32"]
+[ext_resource type="Script" path="res://scripts/movement/base_jump.gd" id="2_4mo5d"]
+[ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="3_hxg5w"]
+[ext_resource type="Script" path="res://scripts/interaction/interactor.gd" id="4_18t1y"]
+
+[sub_resource type="Resource" id="Resource_j6tkt"]
+script = ExtResource("2_4mo5d")
+jump_speed = 300.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t52sc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kapla"]
+
+[sub_resource type="Animation" id="Animation_apdon"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_da4bg"]
+resource_name = "air"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1sudq"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l2lhe"]
+resource_name = "moving"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Circle:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6rfy8"]
+_data = {
+"RESET": SubResource("Animation_apdon"),
+"air": SubResource("Animation_da4bg"),
+"idle": SubResource("Animation_1sudq"),
+"moving": SubResource("Animation_l2lhe")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_13dtj"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0bde6"]
+animation = &"moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dbuxb"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wh3d6"]
+advance_mode = 2
+advance_expression = "velocity.x != 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_20fog"]
+advance_mode = 2
+advance_expression = "velocity.x == 0"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_8emne"]
+states/idle/node = SubResource("AnimationNodeAnimation_13dtj")
+states/idle/position = Vector2(374, 100)
+states/moving/node = SubResource("AnimationNodeAnimation_0bde6")
+states/moving/position = Vector2(568, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_dbuxb"), "idle", "moving", SubResource("AnimationNodeStateMachineTransition_wh3d6"), "moving", "idle", SubResource("AnimationNodeStateMachineTransition_20fog")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t8qun"]
+animation = &"air"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6fcuo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7caxq"]
+advance_mode = 2
+advance_expression = "not _is_on_floor"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ybbcq"]
+advance_mode = 2
+advance_expression = "_is_on_floor"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_s0ab6"]
+states/Moving/node = SubResource("AnimationNodeStateMachine_8emne")
+states/Moving/position = Vector2(437, 100)
+states/Start/position = Vector2(180, 100)
+states/air/node = SubResource("AnimationNodeAnimation_t8qun")
+states/air/position = Vector2(437, -40)
+transitions = ["Start", "Moving", SubResource("AnimationNodeStateMachineTransition_6fcuo"), "Moving", "air", SubResource("AnimationNodeStateMachineTransition_7caxq"), "air", "Moving", SubResource("AnimationNodeStateMachineTransition_ybbcq")]
+graph_offset = Vector2(-75, -194)
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_c31j3"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_kshu6"]
+
+[node name="platformer_character" type="CharacterBody2D"]
+position = Vector2(191, 65)
+script = ExtResource("1_mox32")
+jump = SubResource("Resource_j6tkt")
+
+[node name="Circle" type="Sprite2D" parent="."]
+scale = Vector2(0.284, 0.284)
+texture = ExtResource("3_hxg5w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_t52sc")
+
+[node name="use_interactor" type="Area2D" parent="." groups=["player"]]
+script = ExtResource("4_18t1y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="use_interactor"]
+shape = SubResource("RectangleShape2D_kapla")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6rfy8")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_s0ab6")
+anim_player = NodePath("../AnimationPlayer")
+advance_expression_base_node = NodePath("..")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_c31j3")
+parameters/Moving/playback = SubResource("AnimationNodeStateMachinePlayback_kshu6")

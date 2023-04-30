@@ -20,6 +20,7 @@ Simply fork this repo and start working on your game! Some sample scenes are ava
 - A scene showcasing post-processing effects
 - A simple top-down scene
 - A simple platformer scene
+- A simple platformer character scene with a basin animation state machine setup
 
 ### Common
 - A simple audio manager
@@ -29,6 +30,7 @@ Simply fork this repo and start working on your game! Some sample scenes are ava
 - A main menu
 - A settings menu with audio sliders
 - A pause menu
+- An dialog box for NPC and object interations
 
 ### Movement
 - Top-down movement
@@ -42,5 +44,6 @@ Simply fork this repo and start working on your game! Some sample scenes are ava
 ### Camera
 - Camera following
 - Camera 2D shake
+- Camera areas (the camera will stay in bounds while the player is inside that area)
 
 ### Sprites
