@@ -31,6 +31,7 @@ Simply fork this repo and start working on your game! Some sample scenes are ava
 - A settings menu with audio sliders
 - A pause menu
 - An dialog box for NPC and object interations
+- A shader based minimap!
 
 ### Movement
 - Top-down movement

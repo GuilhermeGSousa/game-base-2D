@@ -1,6 +1,8 @@
 class_name CameraArea extends Area2D
 
 @export var trigger_group : String = "player"
+@export var area_enter : CameraAreaEvent
+@export var area_exit : CameraAreaEvent
 
 @onready var camera = get_viewport().get_camera_2d()
 @onready var collision_shape : CollisionShape2D = $CollisionShape2D
@@ -44,15 +46,15 @@ func _process(delta):
 			left_edge.y + cam_size.y, 
 			right_edge.y - cam_size.y)
 	
-	
-	
 func _on_area_entered(area : Area2D):
 	if not area.is_in_group(trigger_group) : return
 	_is_active = true
+	if area_enter : area_enter.trigger(self)
 	
 func _on_area_exited(area : Area2D):
 	if not area.is_in_group(trigger_group) : return
 	_is_active = false
-
+	if area_exit : area_exit.trigger(self)
+	
 func _get_viewport_size() -> Vector2:
 	return get_viewport_transform().affine_inverse().basis_xform(get_viewport_rect().size)

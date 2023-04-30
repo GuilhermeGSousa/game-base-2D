@@ -1,5 +1,4 @@
-extends Resource
-class_name GameEvent
+class_name GameEvent extends Resource
 
 signal on_event
 

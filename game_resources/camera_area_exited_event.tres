@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="CameraAreaEvent" load_steps=2 format=3 uid="uid://crvckfqny3gya"]
+
+[ext_resource type="Script" path="res://scripts/common/game_events/camera_area_event.gd" id="1_lrylw"]
+
+[resource]
+script = ExtResource("1_lrylw")
