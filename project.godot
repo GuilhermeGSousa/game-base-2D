@@ -28,6 +28,7 @@ SaveManager="*res://scenes/preloads/save_manager.tscn"
 [display]
 
 window/size/resizable=false
+window/size/window_width_override=648
 window/stretch/mode="canvas_items"
 
 [input]
@@ -78,3 +79,8 @@ open_inventory={
 
 2d_render/layer_1="World"
 2d_render/layer_2="Minimap"
+
+[rendering]
+
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true

@@ -1,6 +1,4 @@
-extends BaseHitBox
-
-class_name HitBox
+class_name HitBox extends BaseHitBox
 
 @export var hp : float = 1
 

@@ -296,8 +296,6 @@ camera = NodePath("..")
 min_zoom = 2.0
 targets = Array[NodePath]([NodePath("../../platformer_character")])
 
-[node name="CameraContainer" type="Node" parent="camera_player"]
-
 [node name="camera_area 1" parent="." instance=ExtResource("11_xajsl")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="camera_area 1"]

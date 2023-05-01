@@ -1,6 +1,4 @@
-extends Node
-
-class_name CameraShaker
+class_name CameraShaker extends Node
 
 @export var camera : Camera2D
 @export_range(0, 10) var decay_rate = 1
