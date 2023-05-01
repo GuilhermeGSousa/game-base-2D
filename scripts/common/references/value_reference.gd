@@ -11,5 +11,5 @@ var value :
 func _getter():
 	pass
 
-func _setter(v):
+func _setter(_v):
 	pass

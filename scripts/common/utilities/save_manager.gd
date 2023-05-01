@@ -3,27 +3,37 @@ extends Node
 const IGNORED_PROPERTIES = [
 ]
 
+const SAVE_GROUP = "Saveable"
+
+@export var load_transition : PackedScene
+@export var is_paused : BoolReference
+
 func save_game():
-	var save_nodes : Array[Node] = get_tree().get_nodes_in_group("Saveable")
-	
+	var save_nodes : Array[Node] = get_tree().get_nodes_in_group(SAVE_GROUP)
+	var current_scene = get_tree().current_scene.scene_file_path
 	var data : Dictionary = {} # Load instead
+	data["current_scene"] = current_scene
+	print(current_scene)
 	
 	for node in save_nodes:
-		save_node(data, node)
+		_save_node(data, node)
 	
 	var file = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
-	
 	file.store_var(data)
 	
 func load_game():
+	is_paused.value = false
+	
 	var file = FileAccess.open("user://save_game.dat", FileAccess.READ)
 	var data = file.get_var()
+	var current_scene = data["current_scene"]
 	
-	var save_nodes : Array[Node] = get_tree().get_nodes_in_group("Saveable")
-	for node in save_nodes:
-		load_node(data, node)
-
-func save_node(data : Dictionary, node : Node):
+	# We transition to the new scene first
+	var new_scene : PackedScene = load(current_scene)
+	SceneTransitionManager.change_scene_with_transition(new_scene, load_transition)
+	SceneTransitionManager.on_scene_changed.connect(_on_scene_changed.bind(data))
+	
+func _save_node(data : Dictionary, node : Node):
 	var node_data = {}
 	
 	for p in node.get_property_list():
@@ -47,9 +57,17 @@ func save_node(data : Dictionary, node : Node):
 		
 	data[node.get_path()] = node_data
 
-func load_node(data : Dictionary, node : Node):
+func _load_node(data : Dictionary, node : Node):
+	is_paused.value = false
 	
-	var node_data = data[node.get_path()]
-	
+	var node_data = data[node.get_path()]	
 	for property in node_data:
 		node.set(property, node_data[property])
+
+func _on_scene_changed(data):
+	# We load everything up once the transition is done and the scene is loaded
+	var save_nodes : Array[Node] = get_tree().get_nodes_in_group(SAVE_GROUP)
+	for node in save_nodes:
+		_load_node(data, node)
+	
+	SceneTransitionManager.on_scene_changed.disconnect(_on_scene_changed)

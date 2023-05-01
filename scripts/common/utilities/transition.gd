@@ -9,7 +9,6 @@ signal on_fade_out
 
 func _ready():
 	animation.animation_finished.connect(_on_animation_finished)
-	
 	fade_out()
 
 func _on_animation_finished(animation_name : String):
@@ -17,7 +16,6 @@ func _on_animation_finished(animation_name : String):
 		on_fade_in.emit()
 	elif animation_name == "FadeOut":
 		on_fade_out.emit()
-		
 
 func fade_in():
 	animation.play("FadeIn")

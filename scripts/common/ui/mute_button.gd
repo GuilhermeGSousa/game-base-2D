@@ -8,5 +8,5 @@ func _enter_tree():
 func _exit_tree():
 	toggled.disconnect(toggle_mute)
 	
-func toggle_mute(is_pressed : bool):
-	AudioServer.set_bus_mute(master_bus, is_pressed)
+func toggle_mute(value : bool):
+	AudioServer.set_bus_mute(master_bus, value)

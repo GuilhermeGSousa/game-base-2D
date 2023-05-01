@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b0ikql5uc68xp" path="res://scenes/common/ui/pause_menu.tscn" id="6_qry4t"]
 [ext_resource type="Script" path="res://scripts/camera/camera_area_targeter.gd" id="7_60w6n"]
 [ext_resource type="PackedScene" uid="uid://dnlir14iywfl8" path="res://scenes/common/simple_platformer_character.tscn" id="7_y5jga"]
-[ext_resource type="Resource" uid="uid://cl0it1364ohpu" path="res://game_resources/camera_area_entered_event.tres" id="8_33t0t"]
+[ext_resource type="Resource" uid="uid://cl0it1364ohpu" path="res://game_resources/camera_area_entered_event.tres" id="8_3ebwk"]
 [ext_resource type="Script" path="res://scripts/interaction/dialog/dialog_interactable.gd" id="9_xhclb"]
 [ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="10_e8em0"]
 [ext_resource type="PackedScene" uid="uid://c73mpiglgnsfd" path="res://scenes/common/camera/camera_area.tscn" id="11_xajsl"]
@@ -253,7 +253,7 @@ zoom = Vector2(0.5, 0.5)
 [node name="camera_area_targeter" type="Node" parent="minimap_viewport/camera_minimap" node_paths=PackedStringArray("camera")]
 script = ExtResource("7_60w6n")
 camera = NodePath("..")
-area_entered_even = ExtResource("8_33t0t")
+area_entered_even = ExtResource("8_3ebwk")
 
 [node name="help_text" type="Node2D" parent="."]
 position = Vector2(41, 25)

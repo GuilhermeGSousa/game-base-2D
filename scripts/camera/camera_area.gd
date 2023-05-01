@@ -17,7 +17,7 @@ func _exit_tree():
 	area_entered.disconnect(_on_area_entered)
 	area_exited.disconnect(_on_area_exited)
 
-func _process(delta):
+func _process(_delta):
 	if not _is_active: return
 	
 	var area_rect = collision_shape.shape.get_rect()

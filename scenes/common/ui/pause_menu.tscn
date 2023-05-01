@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0ikql5uc68xp"]
+[gd_scene load_steps=8 format=3 uid="uid://b0ikql5uc68xp"]
 
 [ext_resource type="Script" path="res://scripts/common/ui/pause_menu.gd" id="1_kcrr8"]
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="2_807cf"]
+[ext_resource type="Resource" uid="uid://cbsb63x86q7xo" path="res://game_resources/is_paused_reference.tres" id="3_ahtvt"]
 [ext_resource type="PackedScene" uid="uid://d0ah7mxbllywt" path="res://scenes/common/ui/mute_button.tscn" id="3_gjyvc"]
 [ext_resource type="PackedScene" uid="uid://4mu2eu03wpif" path="res://scenes/common/ui/save_button.tscn" id="4_hed7j"]
 [ext_resource type="PackedScene" uid="uid://dkgmtc8iyl276" path="res://scenes/common/ui/load_button.tscn" id="5_mxgd3"]
@@ -20,6 +21,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme = ExtResource("2_807cf")
 script = ExtResource("1_kcrr8")
+is_paused = ExtResource("3_ahtvt")
 
 [node name="mute_button" parent="." instance=ExtResource("3_gjyvc")]
 layout_mode = 0

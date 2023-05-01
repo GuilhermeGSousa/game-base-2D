@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bduoq4v1di13k"]
 
 [ext_resource type="Script" path="res://scripts/common/utilities/scene_transition_manager.gd" id="1_610m6"]
 

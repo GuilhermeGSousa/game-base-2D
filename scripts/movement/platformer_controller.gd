@@ -21,6 +21,14 @@ signal on_move_ground()
 signal on_jump_start()
 signal on_jump_end()
 
+func _enter_tree():
+	if jump:
+		jump.register(self)
+	
+func _exit_tree():
+	if jump:
+		jump.unregister()
+
 func _ready():
 	_coyote_time_tween.tween_callback(
 		func() : _is_coyote_time = true
@@ -39,9 +47,6 @@ func _ready():
 		func() : _is_jump_buffered = false
 	)
 	_jump_buffer_tween.stop()
-	
-	if jump:
-		jump.register(self)
 
 func _physics_process(delta):
 	_check_floor()
@@ -73,7 +78,7 @@ func _apply_gravity(delta):
 	if not _is_on_floor:
 		velocity.y += gravity * delta
 
-func _apply_movement(delta):
+func _apply_movement(_delta):
 	var direction = Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * move_speed

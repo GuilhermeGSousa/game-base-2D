@@ -4,11 +4,12 @@
 [ext_resource type="Script" path="res://scripts/common/ui/main_menu.gd" id="1_7gw0o"]
 [ext_resource type="FontFile" uid="uid://07yvi11ui7vg" path="res://fonts/Peaberry/PeaberryMono.ttf" id="1_i2dk5"]
 [ext_resource type="StyleBox" uid="uid://b6h4sqok6xlxy" path="res://themes/pixelart/button_normal_style.tres" id="2_40phc"]
-[ext_resource type="PackedScene" uid="uid://yhw10xdgdx8s" path="res://scenes/samples/platformer_sample.tscn" id="2_gqgdn"]
+[ext_resource type="PackedScene" uid="uid://yrthnbnc2awv" path="res://scenes/samples/platformer_sample.tscn" id="2_gqgdn"]
 [ext_resource type="PackedScene" uid="uid://x456vflwsdau" path="res://scenes/scene_transitions/circle_transition.tscn" id="3_lqaap"]
 [ext_resource type="StyleBox" uid="uid://dj0ib6qvmygdj" path="res://themes/pixelart/button_pressed_style.tres" id="3_u8ajb"]
 [ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="4_05n6c"]
 [ext_resource type="Script" path="res://scripts/common/ui/audio_menu.gd" id="4_mjs4o"]
+[ext_resource type="PackedScene" uid="uid://dkgmtc8iyl276" path="res://scenes/common/ui/load_button.tscn" id="9_ijoqn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ve7hb"]
 
@@ -170,8 +171,6 @@ states/settings_menu/position = Vector2(685, 179)
 transitions = ["Start", "main_menu", SubResource("AnimationNodeStateMachineTransition_ckc0g"), "main_menu", "settings_menu", SubResource("AnimationNodeStateMachineTransition_huiay"), "settings_menu", "main_menu", SubResource("AnimationNodeStateMachineTransition_b8jnv")]
 graph_offset = Vector2(-12, 98)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_62be6"]
-
 [node name="menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -223,6 +222,11 @@ vertical_alignment = 1
 [node name="start_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start"
+
+[node name="load_button" parent="Main Menu/MarginContainer/VBoxContainer" instance=ExtResource("9_ijoqn")]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Continue"
 
 [node name="settings_button" type="Button" parent="Main Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -324,6 +328,5 @@ tree_root = SubResource("AnimationNodeStateMachine_6w8s2")
 anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("../Main Menu/Menu Control")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_62be6")
 
 [connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/Button" to="Main Menu/Menu Control" method="_on_return_main_menu_button_pressed"]

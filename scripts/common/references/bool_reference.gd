@@ -1,6 +1,6 @@
-class_name BoolReference extends ValueReference
+class_name FloatReference extends ValueReference
 
-@export var _value : bool = false
+@export var _value : float = 0
 
 func _getter():
 	return _value
