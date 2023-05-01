@@ -246,8 +246,8 @@ offset_bottom = 648.0
 layout_mode = 2
 script = ExtResource("4_mjs4o")
 master_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
-music_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
-sfx_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider")
+music_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider2")
+sfx_slider = NodePath("../MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HSlider3")
 
 [node name="MarginContainer" type="MarginContainer" parent="Settings Menu"]
 layout_mode = 2
@@ -301,18 +301,24 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("1_0bcbq")
+max_value = 1.0
+step = 0.01
 
 [node name="HSlider2" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("1_0bcbq")
+max_value = 1.0
+step = 0.01
 
 [node name="HSlider3" type="HSlider" parent="Settings Menu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("1_0bcbq")
+max_value = 1.0
+step = 0.01
 
 [node name="Button" type="Button" parent="Settings Menu/MarginContainer/VBoxContainer"]
 layout_mode = 2

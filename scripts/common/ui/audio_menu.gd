@@ -18,6 +18,12 @@ func _exit_tree():
 	music_slider.value_changed.disconnect(_on_music_audio_value_changed)
 	sfx_slider.value_changed.disconnect(_on_sfx_audio_value_changed)
 
+func _ready():
+	master_slider.value = db_to_linear(AudioServer.get_bus_volume_db(master_bus))
+	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus))
+	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus))
+	
+
 func _on_master_audio_value_changed(value):
 	AudioServer.set_bus_volume_db(
 		master_bus,
