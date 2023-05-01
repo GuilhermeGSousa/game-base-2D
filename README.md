@@ -1,6 +1,6 @@
 # Game Base 2D for Godot 4
 
-![](https://github.com/GuilhermeGSousa/game-base-2D/main_menu.gif)
+![](https://github.com/GuilhermeGSousa/game-base-2D/blob/master/main_menu.gif)
 
 Check out the [wiki](https://github.com/GuilhermeGSousa/game-base-2D/wiki) for more info on how to use everything in this repo!
 
