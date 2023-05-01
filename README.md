@@ -1,6 +1,6 @@
 # Game Base 2D
 
-Check out the [wiki](https://github.com/GuilhermeGSousa/game-base-2D/wiki/Wiki) for more info on how to use everything in this repo!
+Check out the [wiki](https://github.com/GuilhermeGSousa/game-base-2D/wiki) for more info on how to use everything in this repo!
 
 ## About
 ------------------
