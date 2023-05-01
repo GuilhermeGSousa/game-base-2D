@@ -22,14 +22,16 @@ Simply fork this repo and start working on your game! Some sample scenes are ava
 - A simple platformer scene
 - A simple platformer character scene with a basin animation state machine setup
 
-### Common
+### Game systems
 - A simple audio manager
-- Scene transitions with some cool effects!
+- Scene transition system with some cool effects!
+- A save system. Simply add nodes you want to save to a "Saveable" group to mark them for save!
 
 ### UI
 - A main menu
 - A settings menu with audio sliders
 - A pause menu
+- Save/Load game buttons
 - An dialog box for NPC and object interations
 - A shader based minimap!
 
@@ -46,5 +48,3 @@ Simply fork this repo and start working on your game! Some sample scenes are ava
 - Camera following
 - Camera 2D shake
 - Camera areas (the camera will stay in bounds while the player is inside that area)
-
-### Sprites

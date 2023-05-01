@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://4mu2eu03wpif"]
+
+[ext_resource type="Script" path="res://scripts/common/ui/save_button.gd" id="1_vfodf"]
+
+[node name="save_button" type="Button"]
+size_flags_vertical = 3
+text = "SAVE"
+script = ExtResource("1_vfodf")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkgmtc8iyl276"]
+
+[ext_resource type="Script" path="res://scripts/common/ui/load_button.gd" id="1_jaltq"]
+
+[node name="load_button" type="Button"]
+size_flags_vertical = 3
+text = "LOAD"
+script = ExtResource("1_jaltq")

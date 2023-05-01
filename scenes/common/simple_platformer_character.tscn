@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dnlir14iywfl8"]
+[gd_scene load_steps=24 format=3 uid="uid://dnlir14iywfl8"]
 
 [ext_resource type="Script" path="res://scripts/movement/platformer_controller.gd" id="1_mox32"]
 [ext_resource type="Script" path="res://scripts/movement/base_jump.gd" id="2_4mo5d"]
@@ -128,10 +128,6 @@ states/air/position = Vector2(437, -40)
 transitions = ["Start", "Moving", SubResource("AnimationNodeStateMachineTransition_6fcuo"), "Moving", "air", SubResource("AnimationNodeStateMachineTransition_7caxq"), "air", "Moving", SubResource("AnimationNodeStateMachineTransition_ybbcq")]
 graph_offset = Vector2(-75, -194)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_c31j3"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_kshu6"]
-
 [node name="platformer_character" type="CharacterBody2D"]
 position = Vector2(191, 65)
 script = ExtResource("1_mox32")
@@ -160,5 +156,3 @@ tree_root = SubResource("AnimationNodeStateMachine_s0ab6")
 anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_c31j3")
-parameters/Moving/playback = SubResource("AnimationNodeStateMachinePlayback_kshu6")

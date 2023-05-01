@@ -23,6 +23,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 AudioManager="*res://scenes/preloads/audio_manager.tscn"
 SceneTransitionManager="*res://scenes/preloads/scene_transition_manager.tscn"
+SaveManager="*res://scenes/preloads/save_manager.tscn"
 
 [display]
 
