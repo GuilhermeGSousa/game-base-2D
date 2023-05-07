@@ -1,8 +1,7 @@
-class_name ShakeEffect extends EmptyEffect
+class_name ColorFlickerEffect extends EmptyEffect
 
 @export var sprite_path : NodePath
-@export var max_amplitude : float = 5.0;
-@export var shake_time : float = 1.0;
+@export var flicker_time : float = 1.0;
 
 var tween : Tween
 
@@ -20,14 +19,10 @@ func trigger(node : Node):
 	tween = node.create_tween()
 	tween.tween_callback(
 		func():
-			sprite.material.set_shader_parameter("amplitude", max_amplitude)
+			sprite.material.set_shader_parameter("is_flickering", true)
 	)
-	tween.tween_property(
-		sprite.material,
-		"shader_parameter/amplitude",
-		0.0,
-		shake_time
+	tween.tween_interval(flicker_time)
+	tween.tween_callback(
+		func():
+			sprite.material.set_shader_parameter("is_flickering", false)
 	)
-	
-	
-	

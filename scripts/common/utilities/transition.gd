@@ -1,6 +1,4 @@
-extends CanvasLayer
-
-class_name Transition
+class_name Transition extends CanvasLayer
 
 @export var animation : AnimationPlayer
 

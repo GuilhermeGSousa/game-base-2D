@@ -1,7 +1,5 @@
 class_name CameraTargeter extends Node
 
-@export var camera : Camera2D
-
 @export var zoom_speed = 0.25  # camera zoom lerp speed
 @export var min_zoom : float = 1.5  # camera won't zoom closer than this
 @export var max_zoom : float = 5.0  # camera won't zoom farther than this
@@ -9,6 +7,7 @@ class_name CameraTargeter extends Node
 
 @export var targets : Array[NodePath] = []
 
+@onready var camera : Camera2D = get_viewport().get_camera_2d()
 @onready var screen_size = camera.get_viewport_rect().size
 
 func _process(_delta):

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpsngat21mp2e"]
+
+[ext_resource type="Script" path="res://scripts/camera/camera_shake_manager.gd" id="1_a5k1d"]
+
+[node name="camera_shake_manager" type="Node"]
+script = ExtResource("1_a5k1d")

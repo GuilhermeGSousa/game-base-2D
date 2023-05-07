@@ -1,11 +1,19 @@
-extends Node2D
+class_name Gun extends Node2D
 
+@export var bullet_scene : PackedScene
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@export_group("Effects") 
+@export var shoot_effects : Array[EmptyEffect]
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _input(event):
+	if not event.is_action_pressed("shoot") : return
+	if bullet_scene == null: return
+	
+	var bullet : Node2D = bullet_scene.instantiate() as Node2D
+	get_tree().current_scene.add_child(bullet)
+	bullet.global_position = global_position
+	bullet.global_rotation = get_parent().global_rotation
+	
+	for effect in shoot_effects:
+		if effect == null: continue
+		effect.trigger(self)

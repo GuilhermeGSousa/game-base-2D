@@ -1,29 +1,62 @@
-[gd_scene load_steps=15 format=3 uid="uid://db57g85ysxyka"]
+[gd_scene load_steps=27 format=3 uid="uid://db57g85ysxyka"]
 
 [ext_resource type="Script" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
-[ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="2_stipn"]
-[ext_resource type="Script" path="res://scripts/interaction/hit/hurtbox.gd" id="3_5xi2j"]
+[ext_resource type="Shader" path="res://shaders/sprite.gdshader" id="2_tpd8u"]
 [ext_resource type="Script" path="res://scripts/interaction/hit/hitbox.gd" id="3_f7uyv"]
-[ext_resource type="Script" path="res://scripts/common/gun.gd" id="5_lr7vq"]
-[ext_resource type="PackedScene" uid="uid://dsf307fg18dwa" path="res://scenes/common/target_camera.tscn" id="6_35upf"]
-[ext_resource type="Shader" path="res://shaders/shake2D.gdshader" id="6_rbxgb"]
-[ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="7_ft6n5"]
-[ext_resource type="Script" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="8_fni0t"]
-[ext_resource type="Script" path="res://scripts/interaction/effects/slow_mo_effect.gd" id="9_6wasg"]
+[ext_resource type="Texture2D" uid="uid://ctuyqlhugsiwo" path="res://icon.svg" id="3_kwe0j"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="5_lnxyu"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/slow_mo_effect.gd" id="6_4yby4"]
+[ext_resource type="Script" path="res://scripts/interaction/hit/hurtbox.gd" id="6_ovvjq"]
+[ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="7_5qg83"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/color_flicker_effect.gd" id="7_6d2gh"]
+[ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="8_gyc27"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/particle_effect.gd" id="8_p3qh8"]
+[ext_resource type="Script" path="res://scripts/movement/pointer_rotator.gd" id="9_2pjw3"]
+[ext_resource type="Texture2D" uid="uid://dqnvyneq7rl8f" path="res://sprites/common/gun.png" id="10_uk5b4"]
+[ext_resource type="Script" path="res://scripts/common/gun.gd" id="11_bwora"]
+[ext_resource type="Script" path="res://scripts/movement/rotation_flipped_sprite.gd" id="11_njvwh"]
+[ext_resource type="PackedScene" uid="uid://bvhmykvbihaxr" path="res://scenes/common/bullet.tscn" id="13_eaf6k"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/camera_shake_effect.gd" id="14_m4bn5"]
+[ext_resource type="Script" path="res://scripts/camera/camera_shaker.gd" id="18_7yvpt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xemoo"]
 radius = 51.8
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6222"]
-size = Vector2(107, 28)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_olu1m"]
-shader = ExtResource("6_rbxgb")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7rvq"]
+resource_local_to_scene = true
+shader = ExtResource("2_tpd8u")
 shader_parameter/is_shaking = true
 shader_parameter/amplitude = 0.0
+shader_parameter/is_flickering = false
+shader_parameter/flicker_color = Color(1, 1, 1, 1)
+shader_parameter/flicker_frequency = 10.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ui55i"]
-radius = 73.05
+[sub_resource type="Resource" id="Resource_ej8lc"]
+script = ExtResource("5_lnxyu")
+sprite_path = NodePath("../Sprite2D")
+max_amplitude = 5.0
+shake_time = 1.0
+
+[sub_resource type="Resource" id="Resource_iuduy"]
+script = ExtResource("6_4yby4")
+slowmo_time = 0.5
+slowmo_scale = 0.5
+
+[sub_resource type="Resource" id="Resource_jtvvk"]
+script = ExtResource("7_6d2gh")
+sprite_path = NodePath("../Sprite2D")
+flicker_time = 1.0
+
+[sub_resource type="Resource" id="Resource_qgl23"]
+script = ExtResource("8_p3qh8")
+particles_path = NodePath("../CPUParticles2D")
+
+[sub_resource type="Resource" id="Resource_8ev03"]
+script = ExtResource("14_m4bn5")
+camera_trauma = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k48cb"]
+size = Vector2(100, 100)
 
 [node name="Top Down Sample" type="Node2D"]
 
@@ -32,48 +65,72 @@ position = Vector2(724, 264)
 motion_mode = 1
 script = ExtResource("1_1dc0n")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-texture = ExtResource("2_stipn")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_xemoo")
 
-[node name="Top Down Sword" type="Area2D" parent="CharacterBody2D"]
-script = ExtResource("3_5xi2j")
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+material = SubResource("ShaderMaterial_x7rvq")
+texture = ExtResource("3_kwe0j")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Top Down Sword"]
-modulate = Color(0, 0.0901961, 1, 1)
-position = Vector2(50, 0)
-scale = Vector2(1.04, 0.280001)
-texture = ExtResource("7_ft6n5")
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CharacterBody2D"]
+emitting = false
+amount = 1000
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.15
+lifetime_randomness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 86.54
+initial_velocity_max = 86.54
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Top Down Sword"]
-position = Vector2(51.5, 0)
-shape = SubResource("RectangleShape2D_s6222")
-
-[node name="Gun" type="Node2D" parent="CharacterBody2D"]
-script = ExtResource("5_lr7vq")
-
-[node name="target_camera" parent="." instance=ExtResource("6_35upf")]
-
-[node name="HitBox" type="Area2D" parent="." node_paths=PackedStringArray("damage_effects")]
-position = Vector2(1048, 258)
+[node name="HitBox" type="Area2D" parent="CharacterBody2D"]
+collision_mask = 2
 script = ExtResource("3_f7uyv")
 hp = 50.0
-damage_effects = [NodePath("ShakeEffect"), NodePath("SlowMoEffect")]
+damage_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_ej8lc"), SubResource("Resource_iuduy"), SubResource("Resource_jtvvk"), SubResource("Resource_qgl23")])
 
-[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
-modulate = Color(1, 0.635294, 1, 1)
-material = SubResource("ShaderMaterial_olu1m")
-texture = ExtResource("7_ft6n5")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HitBox"]
+shape = SubResource("CircleShape2D_xemoo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
-shape = SubResource("CircleShape2D_ui55i")
+[node name="Gun" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("9_2pjw3")
 
-[node name="ShakeEffect" type="Node2D" parent="HitBox" node_paths=PackedStringArray("sprite")]
-script = ExtResource("8_fni0t")
-sprite = NodePath("../Sprite2D")
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Gun"]
+texture_filter = 1
+position = Vector2(89, 0)
+scale = Vector2(5.815, 5.815)
+texture = ExtResource("10_uk5b4")
+script = ExtResource("11_njvwh")
 
-[node name="SlowMoEffect" type="Node2D" parent="HitBox"]
-script = ExtResource("9_6wasg")
-slowmo_scale = 0.1
+[node name="Node2D" type="Node2D" parent="CharacterBody2D/Gun/Sprite2D"]
+position = Vector2(4.12726, -2.06363)
+scale = Vector2(0.171969, 0.171969)
+script = ExtResource("11_bwora")
+bullet_scene = ExtResource("13_eaf6k")
+shoot_effects = [SubResource("Resource_8ev03")]
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(975, 249)
+collision_layer = 2
+script = ExtResource("6_ovvjq")
+
+[node name="Sprite2D" type="Sprite2D" parent="HurtBox"]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("7_5qg83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+modulate = Color(1, 0, 0, 1)
+shape = SubResource("RectangleShape2D_k48cb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CameraTargeter" type="Node" parent="Camera2D"]
+script = ExtResource("8_gyc27")
+targets = Array[NodePath]([NodePath("../../CharacterBody2D")])
+
+[node name="CameraShaker" type="Node" parent="Camera2D"]
+script = ExtResource("18_7yvpt")
+max_offset = Vector2(20, 20)
+max_roll = 0.01
+power = 1.0

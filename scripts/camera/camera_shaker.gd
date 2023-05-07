@@ -1,16 +1,23 @@
 class_name CameraShaker extends Node
 
-@export var camera : Camera2D
 @export_range(0, 10) var decay_rate = 1
 @export var max_offset = Vector2(100, 100) 
 @export var max_roll = 0.1
 @export var power : float = 2
+
+@onready var camera : Camera2D = get_viewport().get_camera_2d()
 
 var noise : FastNoiseLite = FastNoiseLite.new()
 
 var noise_y = 0
 var trauma = 0.0
 
+func _enter_tree():
+	CameraShakeManager.on_trauma.connect(add_trauma)
+
+func _exit_tree():
+	CameraShakeManager.on_trauma.disconnect(add_trauma)
+	
 func _ready():
 	randomize()
 	noise.seed = randi()

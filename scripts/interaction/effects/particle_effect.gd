@@ -1,9 +1,12 @@
-extends Effect
+class_name  ParticleEffect extends EmptyEffect
 
-class_name  ParticleEffect
+@export var particles_path : NodePath
 
-@export var particles : CPUParticles2D
-
-func trigger():
-	super()
+func trigger(node : Node):
+	super(node)
+	var particles = node.get_node(particles_path)
+	
+	if particles == null or not particles is CPUParticles2D:
+		return
+	
 	particles.restart()

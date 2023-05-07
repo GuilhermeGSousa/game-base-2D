@@ -1,8 +1,6 @@
-extends Area2D
+class_name BaseHitBox extends Area2D
 
-class_name BaseHitBox
-
-@export var damage_effects : Array[Effect]
+@export var damage_effects : Array[EmptyEffect]
 @export var is_imune : bool = false
 
 signal on_damaged(damage : float)
@@ -18,7 +16,8 @@ func damage(damage_amount : float):
 	on_damaged.emit(damage_amount)
 	_set_hp(_get_hp() - damage_amount)
 	for e in damage_effects:
-		e.trigger()
+		if e == null : return
+		e.trigger(self)
 		
 	if is_dead():
 		on_killed.emit()
