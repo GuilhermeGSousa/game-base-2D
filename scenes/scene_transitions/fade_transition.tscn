@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://scripts/common/utilities/transition.gd" id="1_226go"]
+[ext_resource type="Script" path="res://scripts/utilities/transition.gd" id="1_226go"]
 
 [sub_resource type="Animation" id="Animation_o5pr1"]
 resource_name = "FadeIn"

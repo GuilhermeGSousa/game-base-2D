@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0ikql5uc68xp"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://scripts/common/ui/pause_menu.gd" id="1_kcrr8"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_kcrr8"]
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="2_807cf"]
 [ext_resource type="Resource" uid="uid://cbsb63x86q7xo" path="res://game_resources/is_paused_reference.tres" id="3_ahtvt"]
 [ext_resource type="PackedScene" uid="uid://d0ah7mxbllywt" path="res://scenes/common/ui/mute_button.tscn" id="3_gjyvc"]

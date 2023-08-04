@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://db57g85ysxyka"]
+[gd_scene load_steps=31 format=3 uid="uid://clnfq2gqweyhp"]
 
 [ext_resource type="Script" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
 [ext_resource type="Shader" path="res://shaders/sprite.gdshader" id="2_tpd8u"]
@@ -13,11 +13,12 @@
 [ext_resource type="Script" path="res://scripts/interaction/effects/particle_effect.gd" id="8_p3qh8"]
 [ext_resource type="Script" path="res://scripts/movement/pointer_rotator.gd" id="9_2pjw3"]
 [ext_resource type="Texture2D" uid="uid://dqnvyneq7rl8f" path="res://sprites/common/gun.png" id="10_uk5b4"]
-[ext_resource type="Script" path="res://scripts/common/gun.gd" id="11_bwora"]
 [ext_resource type="Script" path="res://scripts/movement/rotation_flipped_sprite.gd" id="11_njvwh"]
-[ext_resource type="PackedScene" uid="uid://bvhmykvbihaxr" path="res://scenes/common/bullet.tscn" id="13_eaf6k"]
+[ext_resource type="Script" path="res://scripts/gameplay/gun.gd" id="12_2wxgc"]
+[ext_resource type="PackedScene" uid="uid://bkywrvgqsvvmu" path="res://scenes/common/bullet.tscn" id="13_eaf6k"]
 [ext_resource type="Script" path="res://scripts/interaction/effects/camera_shake_effect.gd" id="14_m4bn5"]
 [ext_resource type="Script" path="res://scripts/camera/camera_shaker.gd" id="18_7yvpt"]
+[ext_resource type="Shader" path="res://shaders/shake2D.gdshader" id="19_5t7e4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xemoo"]
 radius = 51.8
@@ -57,6 +58,20 @@ camera_trauma = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k48cb"]
 size = Vector2(100, 100)
+
+[sub_resource type="Resource" id="Resource_xu72g"]
+script = ExtResource("5_lnxyu")
+sprite_path = NodePath("Sprite2D")
+max_amplitude = 5.0
+shake_time = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkpwa"]
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6a7hb"]
+shader = ExtResource("19_5t7e4")
+shader_parameter/is_shaking = true
+shader_parameter/amplitude = 0.0
 
 [node name="Top Down Sample" type="Node2D"]
 
@@ -106,9 +121,9 @@ script = ExtResource("11_njvwh")
 [node name="Node2D" type="Node2D" parent="CharacterBody2D/Gun/Sprite2D"]
 position = Vector2(4.12726, -2.06363)
 scale = Vector2(0.171969, 0.171969)
-script = ExtResource("11_bwora")
+script = ExtResource("12_2wxgc")
 bullet_scene = ExtResource("13_eaf6k")
-shoot_effects = [SubResource("Resource_8ev03")]
+shoot_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_8ev03")])
 
 [node name="HurtBox" type="Area2D" parent="."]
 position = Vector2(975, 249)
@@ -134,3 +149,19 @@ script = ExtResource("18_7yvpt")
 max_offset = Vector2(20, 20)
 max_roll = 0.01
 power = 1.0
+
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2(979, 371)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_f7uyv")
+hp = 100.0
+damage_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_xu72g")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("RectangleShape2D_hkpwa")
+
+[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+material = SubResource("ShaderMaterial_6a7hb")
+position = Vector2(2, 3)
+texture = ExtResource("7_5qg83")

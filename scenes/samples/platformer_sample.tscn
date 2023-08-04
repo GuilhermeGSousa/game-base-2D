@@ -1,8 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://yrthnbnc2awv"]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dfh2vfltyog6k" path="res://scenes/common/ui/dialog_box.tscn" id="1_lp2vr"]
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="3_3nvoo"]
-[ext_resource type="Script" path="res://scripts/common/ui/inventory_menu.gd" id="3_qvf1g"]
+[ext_resource type="Script" path="res://scripts/ui/inventory_menu.gd" id="3_qvf1g"]
 [ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="5_8twu0"]
 [ext_resource type="Texture2D" uid="uid://bs5ru4bg8n3bj" path="res://sprites/tilesets/test-tileset.png" id="6_06eao"]
 [ext_resource type="PackedScene" uid="uid://bfttx6rqnafe" path="res://scenes/common/camera/minimap_viewport.tscn" id="6_147y0"]

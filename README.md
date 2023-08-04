@@ -12,7 +12,7 @@ It aims to include everything needed to create a polished 2D game, from movement
 
 ## Install :computer:
 -----------
-This repo uses Godot 4.1 and above! If Godot 4.1 hasn't yet released when reading this, you will need to build Godot from source.
+This repo uses Godot 4.1 and above!
 
 Simply fork this repo and start working on your game! Some sample scenes are available under `scenes/samples`.
 

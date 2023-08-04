@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck4i767d60eeg"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://scripts/common/utilities/save_manager.gd" id="1_un6d5"]
+[ext_resource type="Script" path="res://scripts/utilities/save_manager.gd" id="1_un6d5"]
 [ext_resource type="PackedScene" uid="uid://x456vflwsdau" path="res://scenes/scene_transitions/circle_transition.tscn" id="2_74jok"]
-[ext_resource type="Resource" uid="uid://cbsb63x86q7xo" path="res://game_resources/is_paused_reference.tres" id="3_oaogy"]
+[ext_resource type="Resource" path="res://game_resources/is_paused_reference.tres" id="3_oaogy"]
 
 [node name="save_system" type="Node"]
 script = ExtResource("1_un6d5")

@@ -86,6 +86,7 @@ shoot={
 2d_render/layer_2="Minimap"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Damage"
+2d_physics/layer_3="NPC"
 
 [rendering]
 

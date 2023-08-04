@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfh2vfltyog6k"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="1_j5voe"]
-[ext_resource type="Script" path="res://scripts/common/ui/dialog/dialog_box.gd" id="2_4j5tl"]
+[ext_resource type="Script" path="res://scripts/ui/dialog_box.gd" id="2_4j5tl"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_63611"]
 animation = &"off"

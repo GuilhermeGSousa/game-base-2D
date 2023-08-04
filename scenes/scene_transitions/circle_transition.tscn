@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://x456vflwsdau"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://scripts/common/utilities/transition.gd" id="1_hsdn8"]
+[ext_resource type="Script" path="res://scripts/utilities/transition.gd" id="1_hsdn8"]
 [ext_resource type="Shader" path="res://shaders/screen_transitions/circle_screen_transition.gdshader" id="2_pt6ot"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fvmw8"]

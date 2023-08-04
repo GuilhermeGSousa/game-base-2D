@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0ah7mxbllywt"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Texture2D" uid="uid://c8yfrjpm5qqjt" path="res://sprites/ui/ui-tileset.png" id="1_pkq8c"]
-[ext_resource type="Script" path="res://scripts/common/ui/mute_button.gd" id="2_8d5e4"]
+[ext_resource type="Script" path="res://scripts/ui/mute_button.gd" id="2_8d5e4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gq6ym"]
 texture = ExtResource("1_pkq8c")
