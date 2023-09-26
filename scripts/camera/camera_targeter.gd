@@ -45,7 +45,7 @@ func _update_camera_zoom():
 	var z
 	var aspect_ratio = screen_size.x / screen_size.y
 	if r.size.x > r.size.y * aspect_ratio :
-		z = clamp(r.size.x / screen_size.x, min_zoom, max_zoom)
+		z = clamp(screen_size.x / r.size.x, min_zoom, max_zoom)
 	else:
-		z = clamp(r.size.y / screen_size.y, min_zoom, max_zoom)
+		z = clamp(screen_size.y / r.size.y, min_zoom, max_zoom)
 	camera.zoom = lerp(camera.zoom, Vector2.ONE * z, zoom_speed)
