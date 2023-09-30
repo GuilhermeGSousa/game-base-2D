@@ -1,14 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkywrvgqsvvmu"]
+[gd_scene load_steps=7 format=3 uid="uid://bkywrvgqsvvmu"]
 
+[ext_resource type="Script" path="res://scripts/gameplay/projectile.gd" id="1_4ya3i"]
 [ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="1_bd75t"]
-[ext_resource type="Script" path="res://scripts/gameplay/bullet.gd" id="1_t4daq"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/destroy_effect.gd" id="2_hpxe7"]
 [ext_resource type="Script" path="res://scripts/interaction/hit/hurtbox.gd" id="3_2didv"]
+
+[sub_resource type="Resource" id="Resource_ed7hs"]
+script = ExtResource("2_hpxe7")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4c8k"]
 
-[node name="bullet" type="Node2D"]
-script = ExtResource("1_t4daq")
-speed = 100.0
+[node name="bullet" type="Node2D" node_paths=PackedStringArray("hurtbox")]
+script = ExtResource("1_4ya3i")
+speed = 500.0
+hurtbox = NodePath("HurtBox")
+hit_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_ed7hs")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.19, 0.19)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://clnfq2gqweyhp"]
+[gd_scene load_steps=30 format=3 uid="uid://clnfq2gqweyhp"]
 
 [ext_resource type="Script" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
 [ext_resource type="Shader" path="res://shaders/sprite.gdshader" id="2_tpd8u"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="5_lnxyu"]
 [ext_resource type="Script" path="res://scripts/interaction/effects/slow_mo_effect.gd" id="6_4yby4"]
 [ext_resource type="Script" path="res://scripts/interaction/hit/hurtbox.gd" id="6_ovvjq"]
-[ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="7_5qg83"]
 [ext_resource type="Script" path="res://scripts/interaction/effects/color_flicker_effect.gd" id="7_6d2gh"]
 [ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="8_gyc27"]
 [ext_resource type="Script" path="res://scripts/interaction/effects/particle_effect.gd" id="8_p3qh8"]
@@ -125,16 +124,16 @@ script = ExtResource("12_2wxgc")
 bullet_scene = ExtResource("13_eaf6k")
 shoot_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_8ev03")])
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="Spikes" type="Area2D" parent="."]
 position = Vector2(975, 249)
 collision_layer = 2
 script = ExtResource("6_ovvjq")
 
-[node name="Sprite2D" type="Sprite2D" parent="HurtBox"]
+[node name="Sprite2D" type="Sprite2D" parent="Spikes"]
 modulate = Color(1, 0, 0, 1)
-texture = ExtResource("7_5qg83")
+texture = ExtResource("3_kwe0j")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes"]
 modulate = Color(1, 0, 0, 1)
 shape = SubResource("RectangleShape2D_k48cb")
 
@@ -142,7 +141,8 @@ shape = SubResource("RectangleShape2D_k48cb")
 
 [node name="CameraTargeter" type="Node" parent="Camera2D"]
 script = ExtResource("8_gyc27")
-targets = Array[NodePath]([NodePath("../../CharacterBody2D")])
+min_zoom = 0.1
+targets = Array[NodePath]([NodePath("../../CharacterBody2D"), NodePath("../../Spikes")])
 
 [node name="CameraShaker" type="Node" parent="Camera2D"]
 script = ExtResource("18_7yvpt")
@@ -150,18 +150,18 @@ max_offset = Vector2(20, 20)
 max_roll = 0.01
 power = 1.0
 
-[node name="HitBox" type="Area2D" parent="."]
-position = Vector2(979, 371)
+[node name="Enemy" type="Area2D" parent="."]
+position = Vector2(372, 250)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("3_f7uyv")
 hp = 100.0
 damage_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_xu72g")])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
 shape = SubResource("RectangleShape2D_hkpwa")
 
-[node name="Sprite2D" type="Sprite2D" parent="HitBox"]
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 material = SubResource("ShaderMaterial_6a7hb")
 position = Vector2(2, 3)
-texture = ExtResource("7_5qg83")
+texture = ExtResource("3_kwe0j")

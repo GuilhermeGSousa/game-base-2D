@@ -1,15 +1,15 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=31 format=3 uid="uid://tqr8mcs2r0kr"]
 
-[ext_resource type="PackedScene" uid="uid://dfh2vfltyog6k" path="res://scenes/common/ui/dialog_box.tscn" id="1_lp2vr"]
+[ext_resource type="PackedScene" uid="uid://ds4pyjrrj8npy" path="res://scenes/common/ui/dialog_box.tscn" id="1_lp2vr"]
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="3_3nvoo"]
 [ext_resource type="Script" path="res://scripts/ui/inventory_menu.gd" id="3_qvf1g"]
 [ext_resource type="Script" path="res://scripts/camera/camera_targeter.gd" id="5_8twu0"]
 [ext_resource type="Texture2D" uid="uid://bs5ru4bg8n3bj" path="res://sprites/tilesets/test-tileset.png" id="6_06eao"]
 [ext_resource type="PackedScene" uid="uid://bfttx6rqnafe" path="res://scenes/common/camera/minimap_viewport.tscn" id="6_147y0"]
-[ext_resource type="PackedScene" uid="uid://b0ikql5uc68xp" path="res://scenes/common/ui/pause_menu.tscn" id="6_qry4t"]
+[ext_resource type="PackedScene" path="res://scenes/common/ui/pause_menu.tscn" id="6_qry4t"]
 [ext_resource type="Script" path="res://scripts/camera/camera_area_targeter.gd" id="7_60w6n"]
 [ext_resource type="PackedScene" uid="uid://dnlir14iywfl8" path="res://scenes/common/simple_platformer_character.tscn" id="7_y5jga"]
-[ext_resource type="Resource" uid="uid://cl0it1364ohpu" path="res://game_resources/camera_area_entered_event.tres" id="8_3ebwk"]
+[ext_resource type="Resource" path="res://game_resources/camera_area_entered_event.tres" id="8_3ebwk"]
 [ext_resource type="Script" path="res://scripts/interaction/dialog/dialog_interactable.gd" id="9_xhclb"]
 [ext_resource type="Texture2D" uid="uid://bi7fkmg3oosb7" path="res://sprites/shapes/square.png" id="10_e8em0"]
 [ext_resource type="PackedScene" uid="uid://c73mpiglgnsfd" path="res://scenes/common/camera/camera_area.tscn" id="11_xajsl"]
@@ -248,7 +248,7 @@ is_on = false
 top_level = true
 z_index = -100
 position = Vector2(-1000, 100)
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.745, 0.745)
 
 [node name="camera_area_targeter" type="Node" parent="minimap_viewport/camera_minimap" node_paths=PackedStringArray("camera")]
 script = ExtResource("7_60w6n")
@@ -290,9 +290,8 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
 
-[node name="CameraTargeter" type="Node" parent="camera_player" node_paths=PackedStringArray("camera")]
+[node name="CameraTargeter" type="Node" parent="camera_player"]
 script = ExtResource("5_8twu0")
-camera = NodePath("..")
 min_zoom = 2.0
 targets = Array[NodePath]([NodePath("../../platformer_character")])
 

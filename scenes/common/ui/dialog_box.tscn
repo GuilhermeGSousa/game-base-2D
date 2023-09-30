@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://ds4pyjrrj8npy"]
 
 [ext_resource type="Theme" uid="uid://byds11vsd6ber" path="res://themes/pixelart/pixelart.tres" id="1_j5voe"]
 [ext_resource type="Script" path="res://scripts/ui/dialog_box.gd" id="2_4j5tl"]
@@ -32,8 +32,6 @@ states/off/position = Vector2(655, 100)
 states/on/node = SubResource("AnimationNodeAnimation_xo41a")
 states/on/position = Vector2(477, 100)
 transitions = ["on", "off", SubResource("AnimationNodeStateMachineTransition_g6ngv"), "off", "on", SubResource("AnimationNodeStateMachineTransition_d0swm"), "Start", "off", SubResource("AnimationNodeStateMachineTransition_mulwt")]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_uhy21"]
 
 [sub_resource type="Animation" id="Animation_s52pd"]
 length = 0.001
@@ -108,7 +106,7 @@ anchor_bottom = 1.0
 offset_left = 57.6
 offset_top = 486.0
 offset_right = -42.4
-offset_bottom = 7.99915
+offset_bottom = 7.99908
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -130,7 +128,6 @@ tree_root = SubResource("AnimationNodeStateMachine_8gm7i")
 anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("..")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_uhy21")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
