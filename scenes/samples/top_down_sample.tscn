@@ -1,7 +1,8 @@
-[gd_scene load_steps=30 format=3 uid="uid://clnfq2gqweyhp"]
+[gd_scene load_steps=33 format=3 uid="uid://clnfq2gqweyhp"]
 
 [ext_resource type="Script" path="res://scripts/movement/top_down_controller.gd" id="1_1dc0n"]
 [ext_resource type="Shader" path="res://shaders/sprite.gdshader" id="2_tpd8u"]
+[ext_resource type="Script" path="res://scripts/movement/flip_to_cursor.gd" id="2_w4yy5"]
 [ext_resource type="Script" path="res://scripts/interaction/hit/hitbox.gd" id="3_f7uyv"]
 [ext_resource type="Texture2D" uid="uid://ctuyqlhugsiwo" path="res://icon.svg" id="3_kwe0j"]
 [ext_resource type="Script" path="res://scripts/interaction/effects/sprite_shake_effect.gd" id="5_lnxyu"]
@@ -12,12 +13,17 @@
 [ext_resource type="Script" path="res://scripts/interaction/effects/particle_effect.gd" id="8_p3qh8"]
 [ext_resource type="Script" path="res://scripts/movement/pointer_rotator.gd" id="9_2pjw3"]
 [ext_resource type="Texture2D" uid="uid://dqnvyneq7rl8f" path="res://sprites/common/gun.png" id="10_uk5b4"]
-[ext_resource type="Script" path="res://scripts/movement/rotation_flipped_sprite.gd" id="11_njvwh"]
 [ext_resource type="Script" path="res://scripts/gameplay/gun.gd" id="12_2wxgc"]
 [ext_resource type="PackedScene" uid="uid://bkywrvgqsvvmu" path="res://scenes/common/bullet.tscn" id="13_eaf6k"]
 [ext_resource type="Script" path="res://scripts/interaction/effects/camera_shake_effect.gd" id="14_m4bn5"]
 [ext_resource type="Script" path="res://scripts/camera/camera_shaker.gd" id="18_7yvpt"]
 [ext_resource type="Shader" path="res://shaders/shake2D.gdshader" id="19_5t7e4"]
+[ext_resource type="Script" path="res://scripts/movement/base_ai_movement.gd" id="19_60ni1"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_b10tn"]
+vertices = PackedVector2Array(-109, -1423, 1027, -1404, 1910, -629, 2329, 558, 907, 1529, -1430, 1047, -1195, -972)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1195, -972, -1430, 1047, 907, 1529, 2329, 558, 1910, -629, 1027, -1404, -109, -1423)])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xemoo"]
 radius = 51.8
@@ -49,7 +55,7 @@ flicker_time = 1.0
 
 [sub_resource type="Resource" id="Resource_qgl23"]
 script = ExtResource("8_p3qh8")
-particles_path = NodePath("../CPUParticles2D")
+particles_path = NodePath("../../CPUParticles2D")
 
 [sub_resource type="Resource" id="Resource_8ev03"]
 script = ExtResource("14_m4bn5")
@@ -72,19 +78,53 @@ shader = ExtResource("19_5t7e4")
 shader_parameter/is_shaking = true
 shader_parameter/amplitude = 0.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8fpi"]
+radius = 72.88
+
 [node name="Top Down Sample" type="Node2D"]
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_b10tn")
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(724, 264)
+position = Vector2(44, 90)
 motion_mode = 1
 script = ExtResource("1_1dc0n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_xemoo")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+[node name="Node2D" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("2_w4yy5")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Node2D"]
 material = SubResource("ShaderMaterial_x7rvq")
 texture = ExtResource("3_kwe0j")
+
+[node name="HitBox" type="Area2D" parent="CharacterBody2D/Node2D"]
+collision_mask = 2
+script = ExtResource("3_f7uyv")
+hp = 50.0
+damage_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_ej8lc"), SubResource("Resource_iuduy"), SubResource("Resource_jtvvk"), SubResource("Resource_qgl23")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Node2D/HitBox"]
+shape = SubResource("CircleShape2D_xemoo")
+
+[node name="Gun" type="Node2D" parent="CharacterBody2D/Node2D"]
+script = ExtResource("9_2pjw3")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Node2D/Gun"]
+texture_filter = 1
+position = Vector2(89, 0)
+scale = Vector2(5.815, 5.815)
+texture = ExtResource("10_uk5b4")
+
+[node name="Node2D" type="Node2D" parent="CharacterBody2D/Node2D/Gun/Sprite2D"]
+position = Vector2(4.12726, -2.06363)
+scale = Vector2(0.171969, 0.171969)
+script = ExtResource("12_2wxgc")
+bullet_scene = ExtResource("13_eaf6k")
+shoot_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_8ev03")])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="CharacterBody2D"]
 emitting = false
@@ -98,32 +138,6 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 86.54
 initial_velocity_max = 86.54
 
-[node name="HitBox" type="Area2D" parent="CharacterBody2D"]
-collision_mask = 2
-script = ExtResource("3_f7uyv")
-hp = 50.0
-damage_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_ej8lc"), SubResource("Resource_iuduy"), SubResource("Resource_jtvvk"), SubResource("Resource_qgl23")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/HitBox"]
-shape = SubResource("CircleShape2D_xemoo")
-
-[node name="Gun" type="Node2D" parent="CharacterBody2D"]
-script = ExtResource("9_2pjw3")
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D/Gun"]
-texture_filter = 1
-position = Vector2(89, 0)
-scale = Vector2(5.815, 5.815)
-texture = ExtResource("10_uk5b4")
-script = ExtResource("11_njvwh")
-
-[node name="Node2D" type="Node2D" parent="CharacterBody2D/Gun/Sprite2D"]
-position = Vector2(4.12726, -2.06363)
-scale = Vector2(0.171969, 0.171969)
-script = ExtResource("12_2wxgc")
-bullet_scene = ExtResource("13_eaf6k")
-shoot_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_8ev03")])
-
 [node name="Spikes" type="Area2D" parent="."]
 position = Vector2(975, 249)
 collision_layer = 2
@@ -136,6 +150,9 @@ texture = ExtResource("3_kwe0j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes"]
 modulate = Color(1, 0, 0, 1)
 shape = SubResource("RectangleShape2D_k48cb")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Spikes"]
+radius = 175.82
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -164,4 +181,21 @@ shape = SubResource("RectangleShape2D_hkpwa")
 [node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 material = SubResource("ShaderMaterial_6a7hb")
 position = Vector2(2, 3)
+texture = ExtResource("3_kwe0j")
+
+[node name="AIEnemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("follow_point")]
+position = Vector2(661.441, 156.149)
+script = ExtResource("19_60ni1")
+follow_point = NodePath("../CharacterBody2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AIEnemy"]
+shape = SubResource("CircleShape2D_s8fpi")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="AIEnemy"]
+target_position = Vector2(666, 164)
+avoidance_enabled = true
+velocity = Vector2(-935.303, -353.849)
+debug_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="AIEnemy"]
 texture = ExtResource("3_kwe0j")

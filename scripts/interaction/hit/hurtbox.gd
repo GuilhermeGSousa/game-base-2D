@@ -9,5 +9,5 @@ func _ready():
 	
 func _on_hit(area : Area2D):
 	if area is HitBox:
-		area.on_hit(damage)
+		area.on_hit(damage, self)
 		on_hit.emit()

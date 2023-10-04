@@ -17,7 +17,7 @@ func trigger(node : Node):
 	if tween:
 		tween.kill()
 		
-	tween = node.create_tween()
+	tween = node.get_tree().root.create_tween()
 	tween.tween_callback(
 		func():
 			sprite.material.set_shader_parameter("amplitude", max_amplitude)

@@ -16,7 +16,7 @@ func trigger(node : Node):
 	if original_timescale == -1:
 		original_timescale = Engine.time_scale
 	
-	tween = node.create_tween()
+	tween = node.get_tree().root.create_tween()
 
 	tween.tween_callback(
 		func ():
