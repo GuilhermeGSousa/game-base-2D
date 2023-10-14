@@ -17,6 +17,9 @@ var _kb_direction = Vector2.ZERO
 var _kb_timer = 0.0
 
 func _ready():
+	if Engine.is_editor_hint():
+		return
+
 	_avoidance_enabled = _nav_agent.avoidance_enabled
 	
 	if _avoidance_enabled:
@@ -62,6 +65,6 @@ func _notification(what):
 	if what == NOTIFICATION_EDITOR_POST_SAVE:
 		update_configuration_warnings()
 
-func _on_velocity_computed(vel : Vector2):
+func _on_velocity_computed(vel : Vector2):	
 	self.velocity = vel
 	move_and_slide()

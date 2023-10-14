@@ -184,8 +184,10 @@ position = Vector2(2, 3)
 texture = ExtResource("3_kwe0j")
 
 [node name="AIEnemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("follow_point")]
-position = Vector2(661.441, 156.149)
+position = Vector2(181, -204)
+velocity = Vector2(-93.5303, -35.3849)
 script = ExtResource("19_60ni1")
+speed = 100.0
 follow_point = NodePath("../CharacterBody2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AIEnemy"]
