@@ -87,7 +87,7 @@ radius = 72.88
 navigation_polygon = SubResource("NavigationPolygon_b10tn")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(44, 90)
+position = Vector2(693, -27)
 motion_mode = 1
 script = ExtResource("1_1dc0n")
 
@@ -155,9 +155,12 @@ shape = SubResource("RectangleShape2D_k48cb")
 radius = 175.82
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(834, 111)
+zoom = Vector2(1, 1)
 
-[node name="CameraTargeter" type="Node" parent="Camera2D"]
+[node name="CameraTargeter" type="Node" parent="Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("8_gyc27")
+camera = NodePath("..")
 min_zoom = 0.1
 targets = Array[NodePath]([NodePath("../../CharacterBody2D"), NodePath("../../Spikes")])
 
@@ -185,9 +188,11 @@ texture = ExtResource("3_kwe0j")
 
 [node name="AIEnemy" type="CharacterBody2D" parent="." node_paths=PackedStringArray("follow_point")]
 position = Vector2(181, -204)
+collision_layer = 4
+collision_mask = 26
 velocity = Vector2(-93.5303, -35.3849)
 script = ExtResource("19_60ni1")
-speed = 100.0
+speed = 20.0
 follow_point = NodePath("../CharacterBody2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AIEnemy"]

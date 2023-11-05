@@ -59,6 +59,7 @@ collision_mask = 24
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(4.99998, -6.99997)
 zoom = Vector2(3, 3)
 limit_left = -175
 limit_top = -195
@@ -66,8 +67,9 @@ limit_right = 405
 limit_bottom = 145
 editor_draw_limits = true
 
-[node name="CameraTargeter" type="Node" parent="Camera2D"]
+[node name="CameraTargeter" type="Node" parent="Camera2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("4_8jsyy")
+camera = NodePath("..")
 min_zoom = 3.0
 max_zoom = 3.0
 targets = Array[NodePath]([NodePath("../../grid_player")])

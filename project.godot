@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Game Base 2D"
-run/main_scene="res://scenes/samples/grid_movement_sample.tscn"
+run/main_scene="res://scenes/samples/platformer_sample.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [audio]
@@ -89,8 +90,3 @@ shoot={
 2d_physics/layer_3="NPC"
 2d_physics/layer_4="Static Object"
 2d_physics/layer_5="Dynamic Object"
-
-[rendering]
-
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

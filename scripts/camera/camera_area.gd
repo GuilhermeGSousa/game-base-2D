@@ -17,27 +17,26 @@ func _exit_tree():
 	area_entered.disconnect(_on_area_entered)
 	area_exited.disconnect(_on_area_exited)
 
-func _process(_delta):
+func _physics_process(_delta):
 	if not _is_active: return
 	
 	var area_rect = collision_shape.shape.get_rect()
 	var area_size = area_rect.size
 	var area_center = collision_shape.global_position
 	var viewport_size = _get_viewport_size()
-	var cam_size = viewport_size / camera.zoom
+	var cam_size = viewport_size / (camera.zoom)
 
 	var left_edge = area_center - area_size / 2
 	var right_edge = area_center + area_size / 2
-	
+
 	if cam_size.x > area_size.x:
 		camera.position.x = area_center.x
 	else:
-		
 		camera.position.x = clamp(
 			camera.position.x, 
 			left_edge.x + cam_size.x, 
 			right_edge.x - cam_size.x)
-		
+	
 	if cam_size.y > area_size.y:
 		camera.position.y = area_center.y
 	else:
@@ -45,6 +44,8 @@ func _process(_delta):
 			camera.position.y, 
 			left_edge.y + cam_size.y, 
 			right_edge.y - cam_size.y)
+	
+	camera.align()
 	
 func _on_area_entered(area : Area2D):
 	if not area.is_in_group(trigger_group) : return

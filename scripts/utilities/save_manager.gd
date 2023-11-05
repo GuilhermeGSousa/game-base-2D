@@ -8,12 +8,14 @@ const SAVE_GROUP = "Saveable"
 @export var load_transition : PackedScene
 @export var is_paused : BoolReference
 
+func has_save_file() -> bool:
+	return FileAccess.file_exists("user://save_game.dat")
+
 func save_game():
 	var save_nodes : Array[Node] = get_tree().get_nodes_in_group(SAVE_GROUP)
 	var current_scene = get_tree().current_scene.scene_file_path
 	var data : Dictionary = {} # Load instead
 	data["current_scene"] = current_scene
-	print(current_scene)
 	
 	for node in save_nodes:
 		_save_node(data, node)
@@ -23,8 +25,11 @@ func save_game():
 	
 func load_game():
 	is_paused.value = false
-	
 	var file = FileAccess.open("user://save_game.dat", FileAccess.READ)
+	
+	if not file:
+		return
+	
 	var data = file.get_var()
 	var current_scene = data["current_scene"]
 	
