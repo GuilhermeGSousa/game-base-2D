@@ -29,7 +29,6 @@ func _ready() -> void:
 				var collision_mask = tile_set.get_physics_layer_collision_mask(physics_layer_index)
 				layer_area.collision_layer = collision_layer
 				layer_area.collision_mask = collision_mask
-				layer_area.area_entered.connect(_on_area_entered)
 				layer_area.area_exited.connect(_on_area_exited)
 				layer_area.area_shape_entered.connect(_on_area_shape_entered.bind(data))
 				
@@ -46,7 +45,7 @@ func _ready() -> void:
 
 			layer_area.add_child(collision_shape)
 
-func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int, tile_data: TileData):
+func _on_area_shape_entered(_area_rid: RID, area: Area2D, _area_shape_index: int, _local_shape_index: int, tile_data: TileData):
 	if colliding_areas.has(area) and colliding_areas[area]:
 		return
 	
@@ -54,10 +53,6 @@ func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, 
 		area.damage(tile_data.get_custom_data("damage"), self)
 	
 	colliding_areas[area] = true
-	
-func _on_area_entered(area: Area2D):
-	pass
-	#colliding_areas[area] = true
 
 func _on_area_exited(area: Area2D):
 	colliding_areas[area] = false

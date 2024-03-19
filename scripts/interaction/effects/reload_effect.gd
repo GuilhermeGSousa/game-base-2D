@@ -1,4 +1,4 @@
 class_name ReloadEffect extends EmptyEffect
 
-func trigger(node : Node):
+func trigger(_node : Node):
 	SaveManager.load_game()

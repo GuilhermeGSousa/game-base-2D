@@ -7,9 +7,6 @@ class_name BaseHitBox extends Area2D
 signal on_damaged(damage: float, damager: Node2D)
 signal on_killed()
 
-func _ready() -> void:
-	body_shape_entered.connect(_on_body_shape_entered)
-	
 func on_hit(damage_amount: float, damager: Node2D):
 	damage(damage_amount, damager)
 
@@ -37,15 +34,3 @@ func _get_hp() -> float:
 
 func _set_hp(_hp: float):
 	pass
-	
-func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int):
-	if body is not TileMap:
-		return
-
-	var tilemap: TileMap = body as TileMap
-	var tile_coords : Vector2i = tilemap.get_coords_for_body_rid(body_rid)
-	
-	var tile_data : TileData = tilemap.get_cell_tile_data(0, tile_coords)
-
-	var damage_value = tile_data.get_custom_data("damage")
-	damage(damage_value, body)

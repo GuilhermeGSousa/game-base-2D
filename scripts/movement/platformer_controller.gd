@@ -12,7 +12,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var hit_box : HitBox
 
 # Private variables
-var _can_move = true
+var _can_move : bool = true
 var _is_coyote_time : bool = false
 var _is_jump_buffered : bool = false
 @onready var _coyote_time_tween : Tween = create_tween()
@@ -87,7 +87,7 @@ func _apply_gravity(delta):
 		velocity.y += gravity * delta
 
 func _apply_movement(_delta):
-	var direction = Input.get_axis("move_left", "move_right") if _can_move else Vector2.ZERO
+	var direction = Input.get_axis("move_left", "move_right") if _can_move else 0.0
 	if direction:
 		velocity.x = direction * move_speed
 	else:
@@ -99,6 +99,8 @@ func _apply_movement(_delta):
 	move_and_slide()
 
 func _apply_jump():
+	if not _can_move: return
+	
 	if Input.is_action_just_pressed("jump") or (_is_jump_buffered and _is_on_floor):
 		if _can_jump():
 			on_jump_start.emit()

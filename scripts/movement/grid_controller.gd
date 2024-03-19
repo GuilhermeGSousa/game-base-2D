@@ -60,7 +60,7 @@ func _move():
 			_is_moving_or_pushing = false
 
 func _get_configuration_warnings():
-	var warnings : PackedStringArray = super._get_configuration_warnings()
+	var warnings : PackedStringArray = []
 	
 	# Check hand for mesh instance
 	if not ScriptUtilities.find_child(self, "Raycast2D"):
