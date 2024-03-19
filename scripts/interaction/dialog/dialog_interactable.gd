@@ -1,6 +1,6 @@
 class_name DialogInteractable extends Interactable
 
-@export var dialog_box : Dialogbox
+@export var dialog_box : DialogBox
 @export var dialog_lines : Array[String]
 
 var _current_line_index = -1

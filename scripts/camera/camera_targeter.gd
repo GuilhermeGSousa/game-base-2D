@@ -59,6 +59,8 @@ func get_target_point() -> Vector2:
 	var p = Vector2.ZERO
 	for target in targets:
 		var t = get_node(target)
+		if t == null:
+			continue
 		p += t.position
 	p /= targets.size()
 	return p
@@ -68,6 +70,8 @@ func _update_camera_zoom():
 	var r = Rect2(camera.position, Vector2.ONE)
 	for target in targets:
 		var t = get_node(target)
+		if t == null:
+			continue
 		r = r.expand(t.position)
 	r = r.grow_individual(margin.x, margin.y, margin.x, margin.y)
 	var z

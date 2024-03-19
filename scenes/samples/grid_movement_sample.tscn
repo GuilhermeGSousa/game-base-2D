@@ -59,7 +59,7 @@ collision_mask = 24
 collide_with_areas = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(4.99998, -6.99997)
+position = Vector2(5, -7)
 zoom = Vector2(3, 3)
 limit_left = -175
 limit_top = -195

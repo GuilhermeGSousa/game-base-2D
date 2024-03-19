@@ -1,15 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnlir14iywfl8"]
+[gd_scene load_steps=27 format=3 uid="uid://dnlir14iywfl8"]
 
 [ext_resource type="Script" path="res://scripts/movement/platformer_controller.gd" id="1_mox32"]
 [ext_resource type="Script" path="res://scripts/movement/base_jump.gd" id="2_4mo5d"]
 [ext_resource type="Texture2D" uid="uid://bvtsxwnb2ou8v" path="res://sprites/shapes/circle.png" id="3_hxg5w"]
 [ext_resource type="Script" path="res://scripts/interaction/interactor.gd" id="4_18t1y"]
+[ext_resource type="Script" path="res://scripts/interaction/hit/hitbox.gd" id="5_03p7k"]
+[ext_resource type="Script" path="res://scripts/interaction/effects/reload_effect.gd" id="6_b56sk"]
 
 [sub_resource type="Resource" id="Resource_j6tkt"]
 script = ExtResource("2_4mo5d")
-jump_speed = 300.0
+jump_speed = 250.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t52sc"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7tr0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kapla"]
 
@@ -128,17 +130,24 @@ states/air/position = Vector2(437, -40)
 transitions = ["Start", "Moving", SubResource("AnimationNodeStateMachineTransition_6fcuo"), "Moving", "air", SubResource("AnimationNodeStateMachineTransition_7caxq"), "air", "Moving", SubResource("AnimationNodeStateMachineTransition_ybbcq")]
 graph_offset = Vector2(-75, -194)
 
-[node name="platformer_character" type="CharacterBody2D"]
-position = Vector2(191, 65)
+[sub_resource type="Resource" id="Resource_5cdti"]
+script = ExtResource("6_b56sk")
+
+[node name="platformer_character" type="CharacterBody2D" node_paths=PackedStringArray("hit_box")]
+visibility_layer = 3
+scale = Vector2(0.5, 0.5)
+collision_mask = 24
 script = ExtResource("1_mox32")
 jump = SubResource("Resource_j6tkt")
+hit_box = NodePath("HitBox")
 
 [node name="Circle" type="Sprite2D" parent="."]
-scale = Vector2(0.284, 0.284)
+visibility_layer = 3
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_hxg5w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_t52sc")
+shape = SubResource("CapsuleShape2D_p7tr0")
 
 [node name="use_interactor" type="Area2D" parent="." groups=["player"]]
 script = ExtResource("4_18t1y")
@@ -153,6 +162,14 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_s0ab6")
-anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("..")
-active = true
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("5_03p7k")
+death_effects = Array[Resource("res://scripts/interaction/effects/empty_effect.gd")]([SubResource("Resource_5cdti")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CapsuleShape2D_p7tr0")

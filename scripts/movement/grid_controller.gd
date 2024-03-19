@@ -48,7 +48,7 @@ func _move():
 			self, "position",
 			position + _inputs[_dir] * _tile_size,
 			move_time
-		).set_trans(Tween.TRANS_SINE)
+		).set_trans(Tween.TRANS_LINEAR)
 		_is_moving_or_pushing = true
 		await tween.finished
 		_is_moving_or_pushing = false

@@ -1,4 +1,4 @@
-class_name Dialogbox extends Control
+class_name DialogBox extends Control
 
 @export var is_on : bool = false
 @export var text : Label

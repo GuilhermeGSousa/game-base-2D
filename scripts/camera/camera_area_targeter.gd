@@ -10,5 +10,5 @@ func _exit_tree():
 	area_entered_even.on_event.disconnect(on_camera_entered)
 
 func on_camera_entered(area : CameraArea):
-	camera.position = area.collision_shape.position
+	camera.global_position = area.collision_shape.global_position
 	

@@ -53,7 +53,7 @@ func _physics_process(delta):
 		_nav_agent.velocity = dir * speed
 
 func _get_configuration_warnings():
-	var warnings : PackedStringArray = super._get_configuration_warnings()
+	var warnings : PackedStringArray = _get_configuration_warnings()
 	
 	# Check hand for mesh instance
 	if not ScriptUtilities.find_child(self, "NavigationAgent2D"):

@@ -331,8 +331,7 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_6w8s2")
-anim_player = NodePath("../AnimationPlayer")
 advance_expression_base_node = NodePath("../Main Menu/Menu Control")
-active = true
+anim_player = NodePath("../AnimationPlayer")
 
 [connection signal="pressed" from="Settings Menu/MarginContainer/VBoxContainer/Button" to="Main Menu/Menu Control" method="_on_return_main_menu_button_pressed"]
