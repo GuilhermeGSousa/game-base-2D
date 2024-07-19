@@ -1,7 +1,6 @@
 # Godot 4+ specific ignores
 .godot/
-templates/
 build*/
-export_presets.cfg
+templates/
 
 .vscode/

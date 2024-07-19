@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master", "itchio-integration" ]
+  pull_request:
+    branches: [ "master" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  ITCH_USERNAME: guilhermegsousa
+  ITCH_GAME_ID: test-game
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+        fail-fast: true
+        matrix:
+            platform:
+                - html5
+    steps:
+      - uses: actions/checkout@v2
+      - uses: chickensoft-games/setup-godot@v2.1.1
+        with:
+          version: 4.3.0-beta3
+          include-templates: true
+          use-dotnet: false
+      - name: Web Build
+        run: |
+          mkdir -p build/${{ matrix.platform }}
+          godot -v --export-release "${{ matrix.platform }}" --headless
+      - uses: KikimoraGames/itch-publish@v0.0.3
+        with:
+          butlerApiKey: ${{secrets.BUTLER_API_KEY}}
+          gameData: ./build/${{ matrix.platform }}
+          itchUsername: ${{env.ITCH_USERNAME}}
+          itchGameId: ${{ env.ITCH_GAME_ID }}
+          buildChannel: ${{ matrix.platform }}
