@@ -5,19 +5,19 @@
 Check out the [wiki](https://github.com/GuilhermeGSousa/game-base-2D/wiki) for more info on how to use everything in this repo!
 
 ## About
-------------------
 A base structure for 2D games using Godot 4.
 
 It aims to include everything needed to create a polished 2D game, from movement scripts to screen postprocessing shaders, while leveraging the new features of Godot 4 and using a clean, scalable and extensible code architecture.
 
 ## Install :computer:
------------
 This repo uses Godot 4.1 and above!
 
 Simply fork this repo and start working on your game! Some sample scenes are available under `scenes/samples`.
 
+## Itch.io Integration :robot:
+This repo also contains workflows to automatically publish this game on itch.io, every time a commit is pushed to `master`. [Check out this wiki page](https://github.com/GuilhermeGSousa/game-base-2D/wiki/Itch.io-Integration) to learn how to set this up for your own game!
+
 ## Content
------------
 
 ### Samples :video_game:
 
