@@ -12,11 +12,6 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-env:
-  ITCH_USERNAME: guilhermegsousa
-  ITCH_GAME_ID: test-game
-  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,6 +35,6 @@ jobs:
         with:
           butlerApiKey: ${{secrets.BUTLER_API_KEY}}
           gameData: ./build/${{ matrix.platform }}
-          itchUsername: ${{env.ITCH_USERNAME}}
-          itchGameId: ${{ env.ITCH_GAME_ID }}
+          itchUsername: ${{ vars.ITCH_USERNAME }}
+          itchGameId: ${{ vars.ITCH_GAME_ID }}
           buildChannel: ${{ matrix.platform }}
