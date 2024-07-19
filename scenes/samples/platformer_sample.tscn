@@ -21,7 +21,7 @@ shader_parameter/color = Color(0.992157, 0, 0, 1)
 shader_parameter/background_color = null
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_drpd8"]
-viewport_path = NodePath(".")
+viewport_path = NodePath("minimap_viewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpma6"]
 size = Vector2(288, 213)
@@ -38,9 +38,8 @@ size = Vector2(195, 200)
 
 [node name="pause_menu" parent="ui" instance=ExtResource("6_qry4t")]
 
-[node name="dialog_box" parent="ui" node_paths=PackedStringArray("text") instance=ExtResource("1_lp2vr")]
+[node name="dialog_box" parent="ui" instance=ExtResource("1_lp2vr")]
 is_on = false
-text = NodePath("Panel/Label")
 
 [node name="minimap" type="Control" parent="ui"]
 layout_mode = 3
@@ -123,10 +122,9 @@ area_exit = ExtResource("11_xwxnv")
 position = Vector2(675.5, -54)
 shape = SubResource("RectangleShape2D_ysyjb")
 
-[node name="platformer_character" parent="." node_paths=PackedStringArray("hit_box") groups=["Saveable"] instance=ExtResource("7_y5jga")]
+[node name="platformer_character" parent="." groups=["Saveable"] instance=ExtResource("7_y5jga")]
 position = Vector2(12, 8)
 move_speed = 200.0
-hit_box = NodePath("HitBox")
 
 [node name="minimap_viewport" parent="." instance=ExtResource("6_147y0")]
 
