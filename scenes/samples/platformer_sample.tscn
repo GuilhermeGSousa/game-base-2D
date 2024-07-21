@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://tqr8mcs2r0kr"]
+[gd_scene load_steps=22 format=3 uid="uid://tqr8mcs2r0kr"]
 
 [ext_resource type="PackedScene" uid="uid://ds4pyjrrj8npy" path="res://scenes/common/ui/dialog_box.tscn" id="1_lp2vr"]
 [ext_resource type="Script" path="res://scripts/ui/viewport_texture_rect.gd" id="4_eqcxs"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://c73mpiglgnsfd" path="res://scenes/common/camera/camera_area.tscn" id="11_xajsl"]
 [ext_resource type="Resource" path="res://game_resources/camera_area_exited_event.tres" id="11_xwxnv"]
 [ext_resource type="Shader" path="res://shaders/minimap.gdshader" id="12_jhea5"]
+[ext_resource type="Script" path="res://scripts/utilities/save_area.gd" id="15_yjjb5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ihgoj"]
 shader = ExtResource("12_jhea5")
@@ -32,9 +33,13 @@ size = Vector2(332, 273)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysyjb"]
 size = Vector2(195, 200)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ql4cy"]
+size = Vector2(68, 48)
+
 [node name="platformer_sample" type="Node"]
 
 [node name="ui" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="pause_menu" parent="ui" instance=ExtResource("6_qry4t")]
 
@@ -135,3 +140,11 @@ z_as_relative = false
 script = ExtResource("7_60w6n")
 camera = NodePath("..")
 area_entered_even = ExtResource("8_3ebwk")
+
+[node name="save_area" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource("15_yjjb5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="save_area"]
+position = Vector2(24, 14)
+shape = SubResource("RectangleShape2D_ql4cy")
